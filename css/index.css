@@ -1,0 +1,575 @@
+/* Header */
+.header {
+    position: sticky;
+    position: -webkit-sticky; /* Safari */
+    top: 0;
+    z-index: 12;
+    background-color: white;
+    padding: 15px 0 5px 0 ;
+    border-bottom: 3px solid #e1e1e1;
+}
+
+/* Logo */
+    .header .logo {
+        width: 250px;
+        height: 60px;
+        float: left;
+        transition-duration: .1s;
+    }
+    .header .logo:hover {
+        transform: scale(1.05)
+    }
+    .header .logo img {
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+    }
+/* ======= End logo ======== */
+
+/* Content */
+    .header .content{
+        /* tru width cua logo */
+        width: calc(100% - 250px);
+        float: left;
+    }
+
+    /* Search */
+        .search-header {
+            float: left;
+        }
+
+        form.input-search {
+            margin-left: 20px;
+            background: #ddd;
+            border: 2px solid #bbb;
+            border-radius: 10px;
+            height: 35px;
+            width: 300px;
+            /* điều chỉnh width của ô tìm kiếm trên header ở đây */
+        }
+        .input-search input {
+            float: left;
+            padding-left: 15px;
+            border: none;
+            border-radius: 10px 0 0 10px;
+            height: 100%;
+            width: calc(100% - 100px - 20px);
+            /* 100 la width button, 20 la padding button */
+        }
+        .input-search button {
+            float: right;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 0 10px;
+            color: #888;
+            background: none;
+            width: 100px;
+            height: 100%;
+            border: none;
+            cursor: pointer;
+            -webkit-transition-duration: .3s;
+                 -o-transition-duration: .3s;
+                    transition-duration: .3s;
+        }
+        .input-search button:hover {
+            color: #000;
+        }
+
+        .tags {
+            margin: 5px 0 0 20px;
+            font-size: 13px;
+        }
+        .tags a {
+            color: gray;
+            padding: 0 5px;
+        }
+        .tags a:hover {
+            color: black;
+            text-decoration: underline;
+        }
+
+        /* W3 school autocomplete */
+            .autocomplete {
+                /*the container must be positioned relative:*/
+                position: relative;
+                height: 100%;
+            }
+            .autocomplete-items {
+                position: absolute;
+                border: 1px solid #d4d4d4;
+                border-bottom: none;
+                border-top: none;
+                z-index: 99;
+                /*position the autocomplete items to be the same width as the container:*/
+                top: 100%;
+                left: 0;
+                right: 0;
+            }
+            .autocomplete-items div {
+                padding: 10px;
+                cursor: pointer;
+                background-color: #fff; 
+                border-bottom: 1px solid #d4d4d4; 
+            }
+            .autocomplete-items div:hover {
+                /*when hovering an item:*/
+                background-color: #e9e9e9; 
+            }
+            .autocomplete-active {
+                /*when navigating through the items using the arrow keys:*/
+                background-color: DodgerBlue !important; 
+                color: #ffffff; 
+            }
+        /* End auto complete */
+    /* ======= End search ========== */
+
+    /* Tools Member */
+        .tools-member {
+            float: right;
+            display: table;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        .tools-member a {
+            position: relative;
+            padding: 5px 0;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #565;
+            cursor: pointer;
+        }
+        .tools-member a:hover > i {
+            border: 1px solid #fff;
+            background-color: rgb(161, 161, 161);
+            color: #fff;
+        }
+
+        .tools-member i { /* icon */
+            padding: 10px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            color: #000;
+            -webkit-transition: 0.2s;
+            -o-transition: 0.2s;
+            transition: 0.2s;
+        }
+        .tools-member .fa-user {
+            padding: 10px 12.5px;
+        }
+        .tools-member .fa-shopping-cart {
+            padding: 10px 11px;
+        }
+        /* Member */
+            .member {
+                position: relative;
+                float: left;
+                display: table-cell;
+            }
+            .member:hover > .menuMember{
+                z-index: 20;
+                transform: translateX(-40%) scale(1);
+            }
+            .member .menuMember {
+                position: absolute;
+                left: 0;
+                text-align: center;
+                border-radius: 5px;
+                background-color: #eee;
+                min-width: 170px;
+                transition-duration: .15s;
+                transform: translateX(-40%) scale(0);
+            }
+            .member .menuMember a {
+                display: block;
+                padding: 10px 0;
+            }
+            .member .menuMember a:hover {
+                background-color: #888;
+                color: #eee;
+            }
+            .member .hide {
+                display: none;
+            }
+        /* ======= End Member ======= */
+
+        /* Cart */
+            .cart {
+                float: left;
+                display: table-cell;
+                /* border-left: 1px solid #bbb; */
+                margin: 0 15px; 
+                padding-left: 5px;
+            }
+            .cart-number {
+                position: absolute;
+                left: 1.4em;
+                bottom: -1em;
+                font-weight: bold;
+                font-size: 1em;
+                color: red;
+                border-radius: 50%;
+                width: 2em;
+                height: 2em;
+                line-height: 2em;
+                text-align: center;
+            }
+            .cart .cart-number {
+                transition-duration: .4s; 
+            }
+        /* ======= End Cart ======== */
+
+        /* Check Order - Đã loại bỏ */
+            .check-order {
+                float: left;
+                display: table-cell;
+                border-left: 1px solid #bbb;
+                margin-left: 5px;
+                padding-left: 5px; 
+            }
+        /* ======= End Check Order ======= */
+    /* ======= End Tools Member ======= */
+/* ======= End Content ========= */
+/* ======= End header ======== */
+
+/* Style*/
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body,
+html {
+    min-width: 1024px;
+
+}
+
+a {
+    text-decoration: none;
+    color: #222;
+}
+
+.clear {
+    clear: both;
+    line-height: 0;
+}
+
+/* căn giữa section, và set độ rộng lớn nhất là 1200px */
+section {
+    max-width: 1205px;
+    margin: 0 auto;
+}
+
+hr {
+    color: #ddd;
+    background-color: #ddd;
+    border-top: 1px solid #ddd;
+}
+
+.flexContain {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+/* Use for auto clear float */
+/* ====== https://css-tricks.com/snippets/css/clear-fix/ ======== */
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+}
+
+.group:after {
+    clear: both;
+}
+
+.group {
+    zoom: 1;
+    /* For IE 6/7 (trigger hasLayout) */
+}
+
+/* =========   Alert ===============*/
+#alert {
+    z-index: 200; /* luôn trên cùng (đè lên những thứ khác) */
+    display: block;
+    position: fixed;
+    bottom: 40px;
+    right: 5px;
+    padding: 20px;
+    background-color: #111;
+    opacity: 0;
+    color: white;
+    font-weight: bold;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+#closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+/* ===== End clear float ====== */
+
+#goto-top-page {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 100;
+    background: rgba(0, 0, 0, .2);
+    color: #fff;
+    font-size: 18px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: .2s;
+}
+#goto-top-page:hover {
+    background: rgba(0, 0, 0, .7);
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+}
+
+/* ========= ScrollBar ============ */
+::-webkit-scrollbar {
+    width: .7em;
+    height: .7em;
+}
+
+::-webkit-scrollbar-track {
+    background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #999;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bbb;
+}
+
+/* ==================== css thêm , chưa sử dụng ========================= */
+/* tooltip https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_copy_clipboard2 */
+.tooltip {
+    position: absolute;
+    display: inline-block;
+    bottom: 5px;
+    right: 5px;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 21;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* animation ping from thegioididong */
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #f33;
+    border-radius: 100%;
+    display: block;
+}
+
+.dot .ping {
+    border: 1px solid #f33;
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+    background-color: rgba(238, 46, 36, .2);
+    border-radius: 100%;
+    -webkit-animation-duration: 1.25s;
+    animation-duration: 1.25s;
+    -webkit-animation-name: sonar;
+    animation-name: sonar;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    display: block;
+    margin: -1px 0 0 -1px;
+}
+
+@keyframes sonar {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+
+    100% {
+        -webkit-transform: scale(3);
+        transform: scale(3);
+        opacity: 0
+    }
+}
+
+/* top nav */
+/* Top Navigation */
+.top-nav {
+    display: inline-block;
+    background: #f1f1f1;
+    width: 100%;
+    border-bottom: 1px #e1e1e1 solid;
+}
+
+/* Social Icon */
+    .social-top-nav {
+        float: left;
+        display: table;
+    }
+    .social-top-nav a {
+        display: table-cell;
+        padding: 5px;
+        text-align: center;
+        font-size: 13px;
+        height: 2em;
+        width: 2em;
+        line-height: 2em;
+        color: gray;
+        background-color: #f1f1f1;
+        transition-duration: .2s;
+    }
+    /* hightlight icon fb, google, youtube .... when hover */
+    .social-top-nav a:hover { color: #fff; }
+    .fa-facebook:hover { background: #3B5998; }
+    .fa-twitter:hover { background: #55ACEE; }
+    .fa-google:hover { background: #dd4b39; }
+    .fa-youtube:hover { background: #bb0000; }
+/* ======= End Social Icon ======= */
+
+/* Quick link */
+    .top-nav-quicklink {
+        float: right;
+    }
+    .top-nav-quicklink li {
+        display: inline-block;
+        font-size: 1em;
+        color: gray;
+    }
+    .top-nav-quicklink li a {
+        display: block;
+        color: gray;
+        padding: 8px 15px;
+        transition-duration: .15s;
+    }
+    .top-nav-quicklink li a:hover {
+        padding-top: 4px; 
+        border-bottom: 4px solid #000;
+        color: #000;
+    }
+    .top-nav-quicklink li a:hover i {
+        color: Dodgerblue;
+    }
+/* ======= End quick link ======= */
+/* ======= End Top navigation ======= */
+
+/* Plc */
+.plc {
+	background: #dae2dc;
+	/* overflow: hidden; */
+	font-size: 15px;
+	color: #333;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+}
+
+.plc ul {
+	width: 100%;
+}
+
+.plc li {
+	width: 20%;
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 5px 10px;
+	line-height: 20px;
+	border-right: solid 1px #bbb;
+	margin: 5px 0;
+}
+
+.plc li:last-child {
+	border-right: none;
+}
+
+/* ============= Footer ============= */
+.footer {
+	position: relative;
+	/* height: 40px; */
+	width: 100%;
+	background: #476;
+}
+
+.copy-right {
+	width: 100%;
+	text-align: center;
+	line-height: 40px;
+	font-size: 14px;
+	color: #ccc;
+	background-color: #252525;
+}
+
+.copy-right a {
+	color: #ccc;
+	transition: .2s ease;
+}
+
+.copy-right a:hover {
+	color: #fff;
+}
+
+/* ======= End Footer ======== */
