@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Thế giới điện thoại</title>
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="top-nav group">
+      <section>
+        <div class="social-top-nav">
+          <a class="fa fa-facebook"></a>
+          <a class="fa fa-twitter"></a>
+          <a class="fa fa-google"></a>
+          <a class="fa fa-youtube"></a>
+        </div>
+
+        <ul class="top-nav-quicklink flexContain">
+          <li>
+            <a href="index.html"><i class="fa fa-home"></i> Trang chủ</a>
+          </li>
+          <li>
+            <a href="tintuc.html"><i class="fa fa-newspaper-o"></i> Tin tức</a>
+          </li>
+          <li>
+            <a href="tuyendung.html"
+              ><i class="fa fa-handshake-o"></i> Tuyển dụng</a
+            >
+          </li>
+          <li>
+            <a href="gioithieu.html"
+              ><i class="fa fa-info-circle"></i> Giới thiệu</a
+            >
+          </li>
+          <li>
+            <a href="trungtambaohanh.html"
+              ><i class="fa fa-wrench"></i> Bảo hành</a
+            >
+          </li>
+          <li>
+            <a href="lienhe.html"><i class="fa fa-phone"></i> Liên hệ</a>
+          </li>
+        </ul>
+        <!-- End Quick link -->
+      </section>
+      <!-- End Section -->
+    </div>
+    <section>
+      <div class="header group">
+        <div class="logo">
+          <a href="index.html">
+            <img
+              src="img/logo.png"
+              alt="Trang chủ Smartphone Store"
+              title="Trang chủ Smartphone Store"
+            />
+          </a>
+        </div>
+        <!-- End Logo -->
+
+        <div class="content">
+          <div
+            class="search-header"
+            style="position: relative; left: 162px; top: 1px"
+          >
+            <form class="input-search" method="get" action="index.html">
+              <div class="autocomplete">
+                <input
+                  id="search-box"
+                  name="search"
+                  autocomplete="off"
+                  type="text"
+                  placeholder="Nhập từ khóa tìm kiếm..."
+                />
+                <button type="submit">
+                  <i class="fa fa-search"></i>
+                  Tìm kiếm
+                </button>
+              </div>
+            </form>
+            <!-- End Form search -->
+            <div class="tags">
+              <strong>Từ khóa: </strong>
+            </div>
+          </div>
+          <!-- End Search header -->
+
+          <div class="tools-member">
+            <div class="member">
+              <a onclick="checkTaiKhoan()">
+                <i class="fa fa-user"></i>
+                Tài khoản
+              </a>
+              <div class="menuMember hide">
+                <a href="nguoidung.html">Trang người dùng</a>
+                <a
+                  onclick="if(window.confirm('Xác nhận đăng xuất ?')) logOut();"
+                  >Đăng xuất</a
+                >
+              </div>
+            </div>
+            <!-- End Member -->
+
+            <div class="cart">
+              <a href="giohang.html">
+                <i class="fa fa-shopping-cart"></i>
+                <span>Giỏ hàng</span>
+                <span class="cart-number"></span>
+              </a>
+            </div>
+            <!-- End Cart -->
+          </div>
+          <!-- End Tools Member -->
+        </div>
+        <!-- End Content -->
+      </div>
+    </section>
+    <!-- ============== Alert Box ============= -->
+    <div class="plc">
+      <section>
+        <ul class="flexContain">
+          <li>Giao hàng hỏa tốc trong ngày</li>
+          <li>Thanh toán linh hoạt: tiền mặt, ngân hàng, trả góp</li>
+          <li>Trải nghiệm sản phẩm tại cửa hàng</li>
+          <li>Lỗi 1 đổi 1 trong 1 tuần</li>
+          <li>
+            Hỗ trợ suốt thời gian sử dụng. <br />Hotline:
+            <a href="tel:12345678" style="color: #288ad6">0123456789</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <!-- ============== Footer ============= -->
+    <div class="copy-right">
+      <p>
+        <a href="index.html">Mobile Phone Store</a> - All rights reserved © 2023
+        - Designed by
+        <span style="color: #eee; font-weight: bold">group 6th</span>
+      </p>
+    </div>
+
+    <!-- End Header -->
+  </body>
+</html>
