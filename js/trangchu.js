@@ -151,6 +151,19 @@ window.onload = function () {
   addStarFilter(4);
   addStarFilter(5);
 
+  addRam("2");
+  addRam("3");
+  addRam("4");
+  addRam("6");
+  addRam("8");
+  addRam("12");
+
+  addRom("32");
+  addRom("64");
+  addRom("128");
+  addRom("256");
+  addRom("512");
+  addRom("1024");
   // Thêm chọn sắp xếp
   addSortFilter("ascending", "price", "Giá tăng dần");
   addSortFilter("decrease", "price", "Giá giảm dần");
@@ -176,6 +189,8 @@ var filtersFromUrl = {
   promo: "",
   star: "",
   page: "",
+  ram: "",
+  rom: "",
   sort: {
     by: "",
     type: "ascending",
@@ -195,7 +210,7 @@ function getFilterFromURL() {
   }
   return [];
 }
-
+// phân tích xem sẽ tìm kiếm theo bộ lọc nào vd search,price
 function phanTich_URL(filters, saveFilter) {
   var result = copyObject(list_products);
 
@@ -231,7 +246,14 @@ function phanTich_URL(filters, saveFilter) {
         result = timKiemTheoKhuyenMai(result, dauBang[1]);
         if (saveFilter) filtersFromUrl.promo = dauBang[1];
         break;
-
+      case "ram":
+        result = timKiemTheoRam(result, dauBang[1]);
+        if (saveFilter) filtersFromUrl.ram = dauBang[1];
+        break;
+      case "rom":
+        result = timKiemTheoRom(result, dauBang[1]);
+        if (saveFilter) filtersFromUrl.rom = dauBang[1];
+        break;
       case "page": // page luôn ở cuối đường link
         if (saveFilter) filtersFromUrl.page = dauBang[1];
         break;
@@ -466,7 +488,6 @@ function timKiemTheoGiaTien(list, giaMin, giaMax, soluong) {
       if (count <= 0) break;
     }
   }
-
   return result;
 }
 
@@ -486,15 +507,13 @@ function timKiemTheoKhuyenMai(list, tenKhuyenMai, soluong) {
 
   return result;
 }
-
-function timKiemTheoRAM(list, luongRam, soluong) {
+function timKiemTheoRam(list, ram, soluong) {
   var count,
     result = [];
   if (soluong < list.length) count = soluong;
   else count = list.length;
-
   for (var i = 0; i < list.length; i++) {
-    if (parseInt(list[i].detail.ram) == luongRam) {
+    if (list[i].detail.ram == ram + " GB") {
       result.push(list[i]);
       count--;
       if (count <= 0) break;
@@ -503,6 +522,39 @@ function timKiemTheoRAM(list, luongRam, soluong) {
 
   return result;
 }
+function timKiemTheoRom(list, rom, soluong) {
+  var count,
+    result = [];
+  if (soluong < list.length) count = soluong;
+  else count = list.length;
+
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].detail.rom == rom + " GB") {
+      result.push(list[i]);
+      count--;
+      if (count <= 0) break;
+    }
+  }
+
+  return result;
+}
+
+// function timKiemTheoRAM(list, luongRam, soluong) {
+//   var count,
+//     result = [];
+//   if (soluong < list.length) count = soluong;
+//   else count = list.length;
+
+//   for (var i = 0; i < list.length; i++) {
+//     if (parseInt(list[i].detail.ram) == luongRam) {
+//       result.push(list[i]);
+//       count--;
+//       if (count <= 0) break;
+//     }
+//   }
+
+//   return result;
+// }
 
 // ========== LỌC ===============
 // Thêm bộ lọc đã chọn vào html
@@ -544,6 +596,10 @@ function addAllChoosedFilter() {
   if (filtersFromUrl.star != "")
     addChoosedFilter("star", starToString(filtersFromUrl.star));
 
+  if (filtersFromUrl.ram != "")
+    addChoosedFilter("ram", ramToString(filtersFromUrl.ram));
+  if (filtersFromUrl.rom != "")
+    addChoosedFilter("rom", romToString(filtersFromUrl.rom));
   if (filtersFromUrl.sort.by != "") {
     var sortBy = sortToString(filtersFromUrl.sort.by);
     var kieuSapXep =
@@ -586,7 +642,6 @@ function createLinkFilter(type, nameFilter, valueAdd) {
   // nên lúc tạo link sẽ khác những loại trên
   if (o.sort.by != "")
     link += (h ? "&" : "?") + "sort=" + o.sort.by + "-" + o.sort.type;
-
   return link;
 }
 
@@ -632,11 +687,12 @@ function getNameFromLi(li) {
   var a = li.getElementsByTagName("a")[0];
   var h3 = a.getElementsByTagName("h3")[0];
   var name = h3.innerHTML;
+
   return name;
 }
 
 function filterProductsName(ele) {
-  var filter = ele.value.toUpperCase();
+  var filter = ele.value.toUpperCase(); // giá trị của input chỗ nhập tìm kiếm
   var listLi = getLiArray();
   var coSanPham = false;
 
@@ -660,33 +716,6 @@ function filterProductsName(ele) {
 }
 
 // lọc theo số lượng sao
-function getStarFromLi(li) {
-  var a = li.getElementsByTagName("a")[0];
-  var divRate = a.getElementsByClassName("ratingresult");
-  if (!divRate) return 0;
-
-  divRate = divRate[0];
-  var starCount = divRate.getElementsByClassName("fa-star").length;
-
-  return starCount;
-}
-
-function filterProductsStar(num) {
-  var listLi = getLiArray();
-  var coSanPham = false;
-
-  for (var i = 0; i < listLi.length; i++) {
-    if (getStarFromLi(listLi) >= num) {
-      showLi(listLi[i]);
-      coSanPham = true;
-    } else {
-      hideLi(listLi[i]);
-    }
-  }
-
-  // Thông báo nếu không có sản phẩm
-  alertNotHaveProduct(coSanPham);
-}
 
 // ================= Hàm khác ==================
 
@@ -748,6 +777,24 @@ function addStarFilter(value) {
     .getElementsByClassName("dropdown-content")[0].innerHTML += star;
 }
 
+function addRom(name) {
+  var link = createLinkFilter("add", "rom", name);
+
+  var text = romToString(name);
+  var rom = `<a href="` + link + `">` + text + `</a>`;
+  document
+    .getElementsByClassName("romFilter")[0]
+    .getElementsByClassName("dropdown-content")[0].innerHTML += rom;
+}
+function addRam(name) {
+  var link = createLinkFilter("add", "ram", name);
+
+  var text = ramToString(name);
+  var ram = `<a href="` + link + `">` + text + `</a>`;
+  document
+    .getElementsByClassName("ramFilter")[0]
+    .getElementsByClassName("dropdown-content")[0].innerHTML += ram;
+}
 // Thêm chọn sắp xếp theo giá
 function addSortFilter(type, nameFilter, text) {
   var link = createLinkFilter("add", "sort", {
@@ -782,6 +829,39 @@ function promoToString(name) {
   }
 }
 
+function ramToString(ram) {
+  switch (ram) {
+    case "2":
+      return "2 GB";
+    case "3":
+      return "3 GB";
+    case "4":
+      return "4 GB";
+    case "6":
+      return "6 GB";
+    case "8":
+      return "8 GB";
+    case "12":
+      return "12 GB";
+  }
+}
+
+function romToString(rom) {
+  switch (rom) {
+    case "32":
+      return "32 GB";
+    case "64":
+      return "64 GB";
+    case "128":
+      return "128 GB";
+    case "256":
+      return "256 GB";
+    case "512":
+      return "512 GB";
+    case "1024":
+      return "1024 GB";
+  }
+}
 // Chuyển số sao về dạng chuỗi tiếng việt
 function starToString(star) {
   return "Từ " + star + " sao";
@@ -804,16 +884,3 @@ function sortToString(sortBy) {
 }
 
 // Hàm Test, chưa sử dụng
-function hideSanPhamKhongThuoc(list) {
-  var allLi = getLiArray();
-  for (var i = 0; i < allLi.length; i++) {
-    var hide = true;
-    for (var j = 0; j < list.length; j++) {
-      if (getNameFromLi(allLi[i]) == list[j].name) {
-        hide = false;
-        break;
-      }
-    }
-    if (hide) hideLi(allLi[i]);
-  }
-}

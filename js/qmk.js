@@ -1,6 +1,6 @@
 function addqmk() {
   document.write(`
-  <span class="close" onclick="window.location.href='index.html'">&times;</span>
+  <span class="close-qmk" onclick="window.location.href='index.html'">&times;</span>
 
   <div class="container">
     <div class="row justify-content-center mt-5">

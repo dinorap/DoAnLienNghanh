@@ -248,9 +248,6 @@ function changeInfo(iTag, info) {
   } else {
     iTag.innerHTML = "Đồng ý";
     inp.focus();
-    var v = inp.value;
-    inp.value = "";
-    inp.value = v;
   }
 
   inp.readOnly = !inp.readOnly;
