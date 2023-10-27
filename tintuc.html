@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.37">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Tin tức - Thế giới điện thoại</title>
+  <link rel="shortcut icon" href="img/favicon.ico" />
+
+  <!-- Load font awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- our files -->
+  <!-- css -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/topnav.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/taikhoan.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/tintuc.css" />
+
+  <!-- js -->
+  <script src="data/products.js"></script>
+  <script src="js/dungchung.js"></script>
+  <script>
+    window.onload = function () {
+      khoiTao();
+      // thêm tags (từ khóa) vào khung tìm kiếm
+      var tags = ["Samsung", "iPhone", "Huawei", "Oppo", "Mobi"];
+      for (var t of tags) addTags(t, "index.html?search=" + t);
+    };
+  </script>
+</head>
+
+<body>
+  <script>
+    addTopNav();
+  </script>
+
+  <section style="min-height: 85vh">
+    <script>
+      addHeader();
+    </script>
+
+    <div class="body-tintuc">
+      <div class="tintuc-info">
+        <a href="https://www.thegioididong.com/tin-tuc/hotsale-cuoi-tuan-tung-bung-ha-gia-loat-smartphone-1547492"
+          target="_blank">
+          <img src="img/banners/banner10.png" />
+          <h2>
+            Hotsale cuối tuần - tưng bừng hạ giá loạt smartphone tại TGDĐ,
+            giảm khủng nhất đến 19 triệu
+          </h2>
+        </a>
+        <br />
+        <h5>Thế giới di động &emsp;19 giờ</h5>
+      </div>
+      <div class="tintuc-info">
+        <a href="https://vnexpress.net/trai-nghiem-cac-nang-cap-tren-iphone-15-pro-max-4652592.html" target="_blank">
+          <img src="img/tintuc/DSCF0991-1694567649-4037-1694567678.jpg" />
+          <h2>Trải nghiệm các nâng cấp trên iPhone 15 Pro Max</h2>
+        </a>
+        <br />
+        <h5>vnexpress &emsp; 8 giờ</h5>
+      </div>
+      <div class="tintuc-info">
+        <a href="https://vnexpress.net/co-nen-dung-cap-dien-thoai-android-cho-iphone-15-4657237.html" target="_blank">
+          <img
+            src="https://i1-sohoa.vnecdn.net/2023/09/25/a1-1695633995-1473-1695634060.jpg?w=240&h=144&q=100&dpr=2&fit=crop&s=FZN0PqT_Uiw8wsmAMPhvNg" />
+          <h2>
+            Có nên dùng cáp điện thoại Android cho iPhone 15?
+          </h2>
+        </a>
+        <br />
+        <h5>vnexpress &emsp; 6 giờ</h5>
+      </div>
+      <div class="tintuc-info">
+        <a href="https://vnexpress.net/iphone-16-co-the-nang-cap-manh-ve-man-hinh-4656919.html" target="_blank">
+          <img
+            src="https://i1-sohoa.vnecdn.net/2023/09/25/dscf0906-1694732769-1695574809-2309-1695574831.jpg?w=240&h=144&q=100&dpr=2&fit=crop&s=r8I9tunj01PjMVT3Fs-Dcw" />
+          <h2>iPhone 16 có thể nâng cấp mạnh về màn hình</h2>
+        </a>
+        <br />
+        <h5>vnexpress &emsp; 13 giờ</h5>
+      </div>
+      <div class="tintuc-info">
+        <a href="https://www.24h.com.vn/thoi-trang-hi-tech/xep-hang-14-mau-laptop-duoc-danh-gia-tot-nhat-c407a1504779.html"
+          target="_blank">
+          <img
+            src="https://icdn.24h.com.vn/upload/3-2023/images/2023-09-26/255x170/1695699756-556-thumbnail-width740height555_anh_cat_3_2.jpg"
+            height="148px" width="224px;" />
+          <h2>Xếp hạng 14 mẫu laptop được đánh giá tốt nhất</h2>
+        </a>
+        <br />
+        <h5>Tin Tức 24h &emsp; 9 giờ</h5>
+      </div>
+      <div class="tintuc-info" style="border-bottom: 0">
+        <a href="https://www.24h.com.vn/thoi-trang-hi-tech/lg-gioi-thieu-thiet-bi-giai-tri-xach-tay-27-inches-an-minh-dang-vali-c407a1504822.html"
+          target="_blank">
+          <img
+            src="https://icdn.24h.com.vn/upload/3-2023/images/2023-09-26/255x170/lg-1695710754-665-width740height555_anh_cat_3_2.jpg"
+            height="148px" width="224px;" />
+          <h2>LG giới thiệu thiết bị giải trí xách tay 27-inches "ẩn mình" dạng vali</h2>
+        </a>
+        <br />
+        <h5>Tin Tức 24h &emsp; 19 giờ</h5>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    addContainTaiKhoan();
+  </script>
+
+  <div class="footer">
+    <script>
+      addFooter();
+    </script>
+  </div>
+
+  <i class="fa fa-arrow-up" id="goto-top-page" onclick="gotoTop()"></i>
+</body>
+
+</html>
