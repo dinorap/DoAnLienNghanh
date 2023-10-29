@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.37">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="shortcut icon" href="img/favicon.ico" />
+
+  <title>Thế giới điện thoại</title>
+
+  <!-- Load font awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- our files -->
+  <!-- css -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/topnav.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/taikhoan.css" />
+  <link rel="stylesheet" href="css/gioHang.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <!-- js -->
+  <script src="data/products.js"></script>
+  <script src="js/classes.js"></script>
+  <script src="js/dungchung.js"></script>
+  <script src="js/giohang.js"></script>
+  <style>
+    .error-message {
+      color: red;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    addTopNav();
+  </script>
+
+  <section style="min-height: 90vh">
+    <script>
+      addHeader();
+    </script>
+
+    <table class="listSanPham"></table>
+    <div id="checkoutModal">
+      <div class="infor0">
+        <div class="infor1">
+          <h2 id="modalLabel">Thông tin người mua</h2>
+        </div>
+        <hr>
+        <div class="infor2">
+          <form id="forminf">
+            <div class="form-group">
+              <label for="ho-ten">Họ và tên:</label><br>
+              <input type="text" placeholder="Họ" class="a" style="margin-right: 20px" id="ho">
+              <input type="text" placeholder="Tên" class="a" id="ten">
+              <div class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label><br>
+              <input type="email" placeholder="Email" id="email">
+              <div class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="so-dien-thoai">Số điện thoại:</label><br>
+              <input type="text" placeholder="Số điện thoại" id="sodienthoai">
+              <div class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="dia-chi">Địa chỉ:</label>
+              <div class="form-groupa">
+                <select class="sele" id="tinh">
+                  <option disabled selected>--Chọn Tỉnh/Thành phố--</option>
+                </select>
+                <select class="sele" id="huyen">
+                  <option disabled selected>--Chọn Huyện/Quận--</option>
+                </select>
+
+                <select class="sele" id="xa">
+                  <option disabled selected>--Chọn Phường/Xã--</option>
+                </select>
+              </div>
+              <div class=" error-message">
+              </div>
+              <input id="sonha" type="text" placeholder="Số nhà">
+
+            </div>
+            <div class="form-group">
+              <label>Lời nhắn</label>
+              <textarea rows="5" style="margin-top:10px;" id="hint"></textarea>
+
+            </div>
+          </form>
+        </div>
+        <div class="butt">
+          <button type="submit" class="unconfirm" onclick="closeCheck()">Hủy</button>
+          <button type="submit" class="confirm" onclick="kiemTraThongTin()">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- End Section -->
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const tinhSelect = document.getElementById("tinh");
+      const huyenSelect = document.getElementById("huyen");
+      const xaSelect = document.getElementById("xa");
+
+      // Function để lấy dữ liệu từ API
+      function fetchDataFromAPI(url, selectBox, placeholder) {
+        return fetch(url) // Trả về promise từ fetch
+          .then((response) => {
+            if (response.status === 200) {
+              return response.json();
+            } else {
+              throw new Error("Không thể lấy dữ liệu từ API");
+            }
+          })
+          .then((data) => {
+            selectBox.innerHTML = "";
+            selectBox.appendChild(new Option(placeholder, ""));
+            data.forEach((item) => {
+              selectBox.appendChild(new Option(item.name, item.code));
+            });
+
+          })
+          .catch((error) => {
+            console.error("Đã xảy ra lỗi: " + error.message);
+            throw error; // Ném lỗi để có thể xử lý nó ở nơi gọi hàm
+          });
+      }
+      function fetchDataFromAPI(url, selectBox, placeholder, id) {
+        return fetch(url) // Trả về promise từ fetch
+          .then((response) => {
+            if (response.status === 200) {
+              return response.json();
+            } else {
+              throw new Error("Không thể lấy dữ liệu từ API");
+            }
+          })
+          .then((data) => {
+            selectBox.innerHTML = "";
+            selectBox.appendChild(new Option(placeholder, ""));
+            data.forEach((item) => {
+              if (item.province_code == id)
+                selectBox.appendChild(new Option(item.name, item.code));
+            });
+
+          })
+          .catch((error) => {
+            console.error("Đã xảy ra lỗi: " + error.message);
+            throw error; // Ném lỗi để có thể xử lý nó ở nơi gọi hàm
+          });
+      }
+      function xa(url, selectBox, placeholder, id) {
+        return fetch(url) // Trả về promise từ fetch
+          .then((response) => {
+            if (response.status === 200) {
+              return response.json();
+            } else {
+              throw new Error("Không thể lấy dữ liệu từ API");
+            }
+          })
+          .then((data) => {
+            selectBox.innerHTML = "";
+            selectBox.appendChild(new Option(placeholder, ""));
+            data.forEach((item) => {
+              if (item.district_code == id)
+                selectBox.appendChild(new Option(item.name, item.code));
+            });
+
+          })
+          .catch((error) => {
+            console.error("Đã xảy ra lỗi: " + error.message);
+            throw error; // Ném lỗi để có thể xử lý nó ở nơi gọi hàm
+          });
+      }
+
+      // Lấy dữ liệu tỉnh khi trang web được tải
+      fetchDataFromAPI("https://provinces.open-api.vn/api/p", tinhSelect, "--Chọn Tỉnh/Thành phố--");
+      // Lấy dữ liệu huyện khi người dùng chọn tỉnh
+      tinhSelect.addEventListener("change", function () {
+        const selectedTinh = tinhSelect.value;
+
+        if (selectedTinh) {
+          const huyenURL = `https://provinces.open-api.vn/api/d?province_code=1}`;
+          fetchDataFromAPI(huyenURL, huyenSelect, "--Chọn Huyện/Quận--", selectedTinh);
+        } else {
+          huyenSelect.innerHTML = "--Chọn Huyện/Quận--"; // Xóa dữ liệu huyện nếu không có tỉnh được chọn
+          xaSelect.innerHTML = "--Chọn Phường/Xã--"; // Xóa dữ liệu xã nếu không có tỉnh được chọn
+        }
+      });
+
+      // Lấy dữ liệu xã khi người dùng chọn huyện
+      huyenSelect.addEventListener("change", function () {
+        const selectedHuyen = huyenSelect.value;
+        if (selectedHuyen) {
+          const selectedTinh = tinhSelect.value;
+          const xaURL = `https://provinces.open-api.vn/api/w?district_code=${selectedHuyen}&province_code=${selectedTinh}`;
+          xa(xaURL, xaSelect, "--Chọn Phường/Xã--", selectedHuyen);
+        } else {
+          xaSelect.innerHTML = "--Chọn Phường/Xã--"; // Xóa dữ liệu xã nếu không có huyện được chọn
+
+        }
+      });
+    });
+
+    addContainTaiKhoan();
+    function kiemTraThongTin() {
+      var isValid = true;
+
+      var hoInput = document.getElementById('ho');
+      var tenInput = document.getElementById('ten');
+      var emailInput = document.getElementById('email');
+      var soDienThoaiInput = document.getElementById('sodienthoai');
+      var tinhThanhPhoSelect = document.getElementById('tinh');
+      var huyenQuanSelect = document.getElementById('huyen');
+      var phuongXaSelect = document.getElementById('xa');
+      var sonhaInput = document.getElementById("sonha")
+      var errorMessages = document.querySelectorAll(".error-message");
+
+      // Xóa bất kỳ thông báo lỗi nào đã hiển thị trước đó
+      errorMessages.forEach(function (message) {
+        message.textContent = "";
+      });
+
+      // Kiểm tra từng trường thông tin và hiển thị thông báo lỗi nếu cần
+      if (hoInput.value === "" || tenInput.value === "") {
+        errorMessages[0].textContent = "Vui lòng nhập đầy đủ họ tên.";
+        isValid = false;
+      }
+      if (sonhaInput.value === "") {
+        errorMessages[0].textContent = "Vui lòng nhập đầy đủ thông tin.";
+        isValid = false;
+      }
+      if (emailInput.value === "") {
+        errorMessages[1].textContent = "Vui lòng nhập Email.";
+        isValid = false;
+      } else {
+        // Sử dụng biểu thức chính quy để kiểm tra định dạng email
+        var emailPattern = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+        if (!emailPattern.test(emailInput.value)) {
+          errorMessages[1].textContent = "Email không hợp lệ.";
+          isValid = false;
+        }
+      }
+      if (soDienThoaiInput.value === "") {
+        errorMessages[2].textContent = "Vui lòng nhập số điện thoại.";
+        isValid = false;
+      } else {
+        // Sử dụng biểu thức chính quy để kiểm tra định dạng số điện thoại
+        var phonePattern = /^[0-9]{10}$/; // Ví dụ: 10 chữ số
+        if (!phonePattern.test(soDienThoaiInput.value)) {
+          errorMessages[2].textContent = "Số điện thoại không hợp lệ định dạng 10 chữ số";
+          isValid = false;
+        }
+      }
+      if (tinhThanhPhoSelect.value === "--Chọn Tỉnh/Thành phố--" || huyenQuanSelect.value === '--Chọn Huyện/Quận--' || phuongXaSelect.value === '--Chọn Phường/Xã--') {
+        errorMessages[3].textContent = "Vui lòng nhập đầy đủ địa chỉ.";
+        isValid = false;
+      }
+      if (isValid) {
+        // Nếu thông tin đã đủ và hợp lệ, thực hiện hành động thanh toán
+        thanhToan();
+      }
+      return isValid;
+    }
+  </script>
+
+  <!-- Các phần còn lại của mã HTML -->
+  </section>
+
+  </script>
+
+  <div class="footer">
+    <script>
+      addFooter();
+    </script>
+  </div>
+  <i class="fa fa-arrow-up" id="goto-top-page" onclick="gotoTop()"></i>
+</body>
+
+</html>
