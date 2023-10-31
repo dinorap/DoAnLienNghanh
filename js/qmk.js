@@ -30,7 +30,6 @@ var listUser = getListUser();
 function validateEmail() {
   const email = document.getElementById("email").value;
   var emailExists = false;
-
   for (var u of listUser) {
     if (u.email === email) {
       emailExists = true;
@@ -51,13 +50,21 @@ function validateEmail() {
   }
 
   if (!emailExists) {
-    // If email does not exist, display an error message
-    Swal.fire({
-      icon: "error",
-      title: "Email không tồn tại",
-      text: "Vui lòng nhập một địa chỉ email tồn tại.",
-      confirmButtonText: "OK",
-    });
+    if (!emailExists && email === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Vui lòng không để trống",
+        text: "Hãy Nhập email của bạn.",
+        confirmButtonText: "OK",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Email không tồn tại",
+        text: "Vui lòng nhập một địa chỉ email tồn tại.",
+        confirmButtonText: "OK",
+      });
+    }
   }
 }
 

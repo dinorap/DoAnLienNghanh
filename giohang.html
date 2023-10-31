@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=0.37">
+  <meta name="viewport" content="width=device-width, initial-scale=0.33">
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="shortcut icon" href="img/favicon.ico" />
 
@@ -115,28 +115,7 @@
       const xaSelect = document.getElementById("xa");
 
       // Function để lấy dữ liệu từ API
-      function fetchDataFromAPI(url, selectBox, placeholder) {
-        return fetch(url) // Trả về promise từ fetch
-          .then((response) => {
-            if (response.status === 200) {
-              return response.json();
-            } else {
-              throw new Error("Không thể lấy dữ liệu từ API");
-            }
-          })
-          .then((data) => {
-            selectBox.innerHTML = "";
-            selectBox.appendChild(new Option(placeholder, ""));
-            data.forEach((item) => {
-              selectBox.appendChild(new Option(item.name, item.code));
-            });
 
-          })
-          .catch((error) => {
-            console.error("Đã xảy ra lỗi: " + error.message);
-            throw error; // Ném lỗi để có thể xử lý nó ở nơi gọi hàm
-          });
-      }
       function fetchDataFromAPI(url, selectBox, placeholder, id) {
         return fetch(url) // Trả về promise từ fetch
           .then((response) => {

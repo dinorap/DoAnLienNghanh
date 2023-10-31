@@ -652,7 +652,7 @@ function addTopNav() {
         <section>
             <div class="social-top-nav">
             <a href="https://www.facebook.com/profile.php?id=61550857511656" class="fab fa-facebook"></a>
-            <a href="https://github.com/dinorap" class="fab fa-github github-link"></a>
+            <a href="https://github.com/dinorap/Nhom6-kt.git" class="fab fa-github github-link"></a>
             <a href="https://www.google.com.vn/?hl=vi" class="fab fa-google"></a>
             <a href="https://www.youtube.com/" class="fab fa-youtube"></a>
             </div> <!-- End Social Topnav -->
