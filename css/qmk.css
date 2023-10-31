@@ -1,0 +1,21 @@
+.close-qmk {
+    /* nút tắt form */
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    font-size: 3rem;
+    width: 1em;
+    height: 1em;
+    line-height: 36px;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+    transition: .2s ease;
+    font-weight: 900;
+  }
+
+  .close-qmk:hover {
+    color: #000000;
+    background-color: #f33;
+    border-radius: 50%;
+  }
