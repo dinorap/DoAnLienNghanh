@@ -1263,3 +1263,54 @@ var list_products = [
     masp: "Opp3",
   },
 ];
+
+var listNews = [
+  {
+    title:
+      "Hotsale cuối tuần - tưng bừng hạ giá loạt smartphone tại TGDĐ,giảm khủng nhất đến 19 triệu",
+    image: "./img/banners/banner10.png",
+    link: "https://www.thegioididong.com/tin-tuc/hotsale-cuoi-tuan-tung-bung-ha-gia-loat-smartphone-1547492",
+    time: "19 giờ trước",
+    web: "Thế giới di động",
+  },
+  {
+    title: "Trải nghiệm các nâng cấp trên iPhone 15 Pro Max",
+    image: "img/tintuc/DSCF0991-1694567649-4037-1694567678.jpg",
+    link: "https://vnexpress.net/trai-nghiem-cac-nang-cap-tren-iphone-15-pro-max-4652592.html",
+    time: "8 giờ trước",
+    web: "vnexpress",
+  },
+  {
+    title: "Có nên dùng cáp điện thoại Android cho iPhone 15?",
+    image:
+      "https://i1-sohoa.vnecdn.net/2023/09/25/a1-1695633995-1473-1695634060.jpg?w=240&h=144&q=100&dpr=2&fit=crop&s=FZN0PqT_Uiw8wsmAMPhvNg",
+    link: "https://vnexpress.net/co-nen-dung-cap-dien-thoai-android-cho-iphone-15-4657237.html",
+    time: "6 giờ trước",
+    web: "vnexpress",
+  },
+  {
+    title: "iPhone 16 có thể nâng cấp mạnh về màn hình",
+    image:
+      "https://i1-sohoa.vnecdn.net/2023/09/25/dscf0906-1694732769-1695574809-2309-1695574831.jpg?w=240&h=144&q=100&dpr=2&fit=crop&s=r8I9tunj01PjMVT3Fs-Dcw",
+    link: "https://vnexpress.net/iphone-16-co-the-nang-cap-manh-ve-man-hinh-4656919.html",
+    time: "13 giờ trước",
+    web: "vnexpress",
+  },
+  {
+    title: "Xếp hạng 14 mẫu laptop được đánh giá tốt nhất",
+    image:
+      "https://icdn.24h.com.vn/upload/3-2023/images/2023-09-26/255x170/1695699756-556-thumbnail-width740height555_anh_cat_3_2.jpg",
+    link: "https://www.24h.com.vn/thoi-trang-hi-tech/xep-hang-14-mau-laptop-duoc-danh-gia-tot-nhat-c407a1504779.html",
+    time: "9 giờ trước",
+    web: "Tin Tức 24h",
+  },
+  {
+    title:
+      "LG giới thiệu thiết bị giải trí xách tay 27-inches ẩn mình dạng vali",
+    image:
+      "https://icdn.24h.com.vn/upload/3-2023/images/2023-09-26/255x170/lg-1695710754-665-width740height555_anh_cat_3_2.jpg",
+    link: "https://www.24h.com.vn/thoi-trang-hi-tech/lg-gioi-thieu-thiet-bi-giai-tri-xach-tay-27-inches-an-minh-dang-vali-c407a1504822.html",
+    time: "19 giờ trước",
+    web: "Tin Tức 24h",
+  },
+];

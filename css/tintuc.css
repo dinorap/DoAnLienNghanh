@@ -25,3 +25,60 @@
 	font-style: italic;
 	color: gray;
 }
+.video {
+	margin-top: 40px;
+	display: flex;
+	gap: 20px;
+	margin-bottom: 20px;
+  }
+
+  .video .video-1 {
+	width: 65%;
+	height: 450px;
+  }
+
+  .video .video-1 iframe {
+	width: 100%;
+	height: 100%;
+  }
+
+  .video .video-2 {
+	width: 35%;
+  }
+
+  .video .video-2 .reporter {
+	font-weight: bold;
+	text-align: right;
+  }
+
+  .head-tit {
+	margin-bottom: 10px;
+  }
+
+  .video .video-2 .related button {
+	border-radius: 50px;
+	border: none;
+	padding: 5px;
+	width: 120px;
+  }
+
+  .video .video-2 .interactive {
+	margin-top: 20px;
+	margin-bottom: 15px;
+
+  }
+
+  .video .video-2 .interactive a {
+	margin-right: 10px;
+  }
+
+  .video .video-2 .comment input {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	border-radius: 5px;
+  }
+
+  .video a {
+	color: black;
+  }

@@ -302,6 +302,12 @@ header h2 {
 .overlayTable input[type="file"] {
     background-color: transparent;
 }
+.add td{
+   width: 100px;
+}
+.add input{
+    width: 350px;
+}
 
 .close {
     /* nút tắt form */

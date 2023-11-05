@@ -380,16 +380,22 @@
           <th title="Sắp xếp" style="width: 5%" onclick="sortKhachHangTable('stt')">
             Stt <i class="fa fa-sort"></i>
           </th>
-          <th title="Sắp xếp" style="width: 15%" onclick="sortKhachHangTable('hoten')">
+          <th title="Sắp xếp" style="width: 10%" onclick="sortKhachHangTable('hoten')">
             Ảnh <i class="fa fa-sort"></i>
           </th>
-          <th title="Sắp xếp" style="width: 20%" onclick="sortKhachHangTable('email')">
+          <th title="Sắp xếp" style="width: 30%" onclick="sortKhachHangTable('email')">
             Title <i class="fa fa-sort"></i>
           </th>
-          <th title="Sắp xếp" style="width: 15%" onclick="sortKhachHangTable('taikhoan')">
+          <th title="Sắp xếp" style="width: 30%" onclick="sortKhachHangTable('taikhoan')">
             Link <i class="fa fa-sort"></i>
           </th>
-          <th style="width: 8%">Hành động</th>
+          <th title="Sắp xếp" style="width: 10%" onclick="sortKhachHangTable('taikhoan')">
+            Web <i class="fa fa-sort"></i>
+          </th>
+          <th title="Sắp xếp" style="width: 5%" onclick="sortKhachHangTable('taikhoan')">
+            Time <i class="fa fa-sort"></i>
+          </th>
+          <th style="width: 10%">Hành động</th>
         </tr>
       </table>
 
@@ -402,12 +408,12 @@
           <option value="taikhoan">Tìm theo tài khoản</option>
         </select>
         <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemNguoiDung(this)" />
-        <button onclick="document.getElementById('KhungThemTaiKhoan').style.transform = 'scale(1)';">
+        <button onclick="document.getElementById('KhungThemTinTuc').style.transform = 'scale(1)';">
           <i class="fa fa-plus-square"></i> Thêm tin tức
         </button>
 
       </div>
-      <div id="KhungThemTaiKhoan" class="overlay">
+      <div id="KhungThemTinTuc" class="overlay">
         <span class="close" onclick="this.parentElement.style.transform = 'scale(0)';">&times;</span>
 
         <table class="overlayTable table-outline table-content table-header">
@@ -415,33 +421,36 @@
             <th colspan="2">Thêm tin tức</th>
           </tr>
           <tr>
-            <td>Họ:</td>
-            <td><input type="text" id="ho" required autocomplete="off" /></td>
+            <td>Hình:</td>
+            <td>
+              <img class="hinhDaiDien" id="anhTinTuc" src="" />
+              <input type="file" accept="image/*" onchange="capNhatAnhSanPham(this.files, 'anhTinTuc')" />
+            </td>
           </tr>
           <tr>
-            <td>Tên:</td>
-            <td><input type="text" id="ten" required autocomplete="off" /></td>
+            <td>Tiêu đề:</td>
+            <td><input type="text" id="title" required autocomplete="off" /></td>
           </tr>
           <tr>
-            <td>Email:</td>
-            <td><input type="email" id="email" required autocomplete="off" /></td>
+            <td>Link:</td>
+            <td><input type="text" id="link" required autocomplete="off" /></td>
           </tr>
           <tr>
-            <td>User name:</td>
-            <td><input type="text" id="user" required autocomplete="off" /></td>
+            <td>Web:</td>
+            <td><input type="text" id="web" required autocomplete="off" /></td>
           </tr>
           <tr>
-            <td>Pass</td>
-            <td><input type="password" id="pass" required autocomplete="off" /></td>
+            <td>Time</td>
+            <td><input type="text" id="time" required autocomplete="off" /></td>
           </tr>
           <tr>
             <td colspan="2" class="table-footer">
-              <button onclick="ThemtaiKhoan()">THÊM</button>
+              <button onclick="ThemTinTuc()">THÊM</button>
             </td>
           </tr>
         </table>
-
       </div>
+      <div id="khungSuaTinTuc" class="overlay add"></div>
     </div>
     <!-- // khach hang -->
   </div>

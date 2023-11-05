@@ -22,7 +22,7 @@ function khoiTao() {
   // get data từ localstorage
   list_products = getListProducts() || list_products;
   adminInfo = getListAdmin() || adminInfo;
-
+  listNews = getListNews() || listNews;
   setupEventTaiKhoan(); //hiệu ứng input và chuyển tab log-sign
   capNhat_ThongTin_CurrentUser(); //hiện thông tin lên thanh header
   addEventCloseAlertButton(); //đóng alert ở footer
@@ -1080,3 +1080,33 @@ function getRandomColor() {
 //     $(target).fadeIn(600);
 
 // });
+function setListNews(newList) {
+  window.localStorage.setItem("listNews", JSON.stringify(newList));
+}
+function getListNews() {
+  return JSON.parse(window.localStorage.getItem("listNews"));
+}
+function tintuc() {
+  listNews = getListNews() || listNews;
+  console.log(listNews);
+  // Lấy dữ liệu từ localStorage dưới dạng JSON
+  if (listNews) {
+    const bodyTintuc = document.getElementById("body-tintuc");
+
+    listNews.forEach((item) => {
+      const newsElement = document.createElement("div");
+      newsElement.classList.add("tintuc-info");
+      newsElement.innerHTML = `
+        <a href="${item.link}" target="_blank">
+          <img src="${item.image}" />
+          <h2>${item.title}</h2>
+        </a>
+        <br />
+        <h5>${item.web} &emsp; ${item.time}</h5>
+      `;
+      bodyTintuc.appendChild(newsElement);
+    });
+  } else {
+    console.log("Không có dữ liệu trong localStorage.");
+  }
+}

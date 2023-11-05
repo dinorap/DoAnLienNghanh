@@ -3,8 +3,8 @@ var TONGTIEN = 0;
 window.onload = function () {
   // get data từ localstorage
   list_products = getListProducts() || list_products;
+  listNews = getListNews() || listNews;
   adminInfo = getListAdmin() || adminInfo;
-
   addEventChangeTab();
 
   if (window.localStorage.getItem("admin")) {
@@ -429,6 +429,7 @@ function layThongTinSanPhamTuTable(id) {
 }
 function themSanPham() {
   var newSp = layThongTinSanPhamTuTable("khungThemSanPham");
+  console.log(newSp);
   if (!newSp) return;
 
   for (var p of list_products) {
@@ -1165,51 +1166,39 @@ function addTableTinTuc() {
     .getElementsByClassName("table-content")[0];
   var s = `<table class="table-outline hideImg">`;
 
-  var listUser = getListUser();
-
-  for (var i = 0; i < listUser.length; i++) {
-    var u = listUser[i];
+  var listNew = getListNews() || listNews;
+  console.log(listNew);
+  for (var i = 0; i < listNew.length; i++) {
+    var u = listNew[i];
     s +=
-      `<tr>
-            <td style="width: 5%">` +
-      (i + 1) +
-      `</td>
-            <td style="width: 17%">` +
-      u.ho +
-      " " +
-      u.ten +
-      `</td>
-            <td style="width: 22%">` +
-      u.email +
-      `</td>
-            <td style="width: 16%">` +
-      u.username +
-      `</td>
-            <td style="width: 31%">` +
-      u.pass +
-      `</td>
-            <td style="width: 9%">
-                <div class="tooltip">
-                    <label class="switch">
-                        <input type="checkbox" ` +
-      (u.off ? "" : "checked") +
-      ` onclick="voHieuHoaNguoiDung(this, '` +
-      u.username +
-      `')">
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="tooltiptext">` +
-      (u.off ? "Mở" : "Khóa") +
-      `</span>
-                </div>
-                <div class="tooltip">
-                    <i class="fa fa-remove" onclick="xoaNguoiDung('` +
-      u.username +
+      `
+    <tr>
+      <td style="width: 5%">${i + 1}</td>
+      <td style="width: 10%;padding:10px"><img src="${
+        u.image
+      }" alt="Image" style="width: 150px; height: 100%; "></td>
+      <td style="width: 30%">${u.title}</td>
+      <td style="width: 30%"><a href="${u.link}" target="_blank">${
+        u.link
+      }</a></td>
+      <td style="width: 10%">${u.web}</td>
+      <td style="width: 5%">${u.time}</td>
+      <td style="width: 15%">
+        <div class="tooltip">
+          <i class="fa fa-wrench" onclick="addKhungSuaTinTuc('` +
+      u.title +
       `')"></i>
-                    <span class="tooltiptext">Xóa</span>
-                </div>
-            </td>
-        </tr>`;
+          <span class="tooltiptext">Sửa</span>
+        </div>
+        <div class="tooltip">
+        <i class="fa fa-trash" onclick="xoaTinTuc('` +
+      u.title +
+      `')"></i>
+          <span class="tooltiptext">Xóa</span>
+        </div>
+      </td>
+    </tr>
+`;
   }
 
   s += `</table>`;
@@ -1374,4 +1363,147 @@ function layThongTinTaiKhoanTuTable(id) {
     ten: ten,
     username: username,
   };
+}
+function ThemTinTuc() {
+  var News = layThongTinTinTucTuTable("KhungThemTinTuc");
+  if (!News) return;
+  listNews.push(News);
+  // Lưu vào localstorage
+  setListNews(listNews);
+  addTableTinTuc();
+  alert('Thêm tin tức "' + News.title + '" thành công.');
+  document.getElementById("KhungThemTinTuc").style.transform = "scale(0)";
+  clearInputNews();
+}
+function clearInputNews() {
+  document.getElementById("title").value = ""; // Thay "ho" bằng id của input họ
+  document.getElementById("link").value = ""; // Thay "ten" bằng id của input tên
+  document.getElementById("web").value = ""; // Thay "email" bằng id của input email
+  document.getElementById("time").value = ""; // Thay "newUser" bằng id của input tên đăng nhập
+}
+function layThongTinTinTucTuTable(id) {
+  var khung = document.getElementById(id);
+  var tr = khung.getElementsByTagName("tr");
+
+  var img = tr[1]
+    .getElementsByTagName("td")[1]
+    .getElementsByTagName("img")[0].src;
+  var title = tr[2]
+    .getElementsByTagName("td")[1]
+    .getElementsByTagName("input")[0].value;
+  var link = tr[3]
+    .getElementsByTagName("td")[1]
+    .getElementsByTagName("input")[0].value;
+  var web = tr[4]
+    .getElementsByTagName("td")[1]
+    .getElementsByTagName("input")[0].value;
+  var time = tr[5]
+    .getElementsByTagName("td")[1]
+    .getElementsByTagName("input")[0].value;
+
+  // if (!ho || !ten || !email || !username || !pass) {
+  //   alert("Vui lòng điền đầy đủ thông tin.");
+  //   return false;
+  // }
+
+  return {
+    title: title,
+    image: img,
+    link: link,
+    time: time,
+    web: web,
+  };
+}
+function xoaTinTuc(title) {
+  if (window.confirm("Bạn có chắc muốn xóa tin tức " + title)) {
+    // Xóa
+    for (var i = 0; i < listNews.length; i++) {
+      if (listNews[i].title == title) {
+        listNews.splice(i, 1);
+      }
+    }
+
+    // Lưu vào localstorage
+    setListNews(listNews);
+    // Vẽ lại table
+    addTableTinTuc();
+  }
+}
+function addKhungSuaTinTuc(title) {
+  var tt;
+  for (var p of listNews) {
+    if (p.title == title) {
+      tt = p;
+    }
+  }
+  var s =
+    `<span class="close" onclick="this.parentElement.style.transform = 'scale(0)';">&times;</span>
+  <table class="overlayTable table-outline table-content table-header">
+  <tr>
+            <th colspan="2">` +
+    tt.title +
+    `</th>
+        </tr>
+     <tr>
+        <td>Hình:</td>
+        <td>
+           <img class="hinhDaiDien" id="anhTinTucSua" src="` +
+    tt.image +
+    `">
+           <input type="file" accept="image/*" onchange="capNhatAnhSanPham(this.files, 'anhTinTucSua')">
+        </td>
+     </tr>
+     <tr>
+            <td>Tiêu đề:</td>
+            <td><input type="text" value="` +
+    tt.title +
+    `"></td>
+        </tr>
+        <tr>
+            <td>Link:</td>
+            <td><input type="text" value="` +
+    tt.link +
+    `"></td>
+        </tr>
+        <tr>
+            <td>Web:</td>
+            <td><input type="text" value="` +
+    tt.web +
+    `"></td>
+        </tr>
+        <tr>
+        <td>Time:</td>
+        <td><input type="text" value="` +
+    tt.time +
+    `"></td>
+    </tr>
+     <tr>
+        <td colspan="2"  class="table-footer"> <button onclick="suaTinTuc('` +
+    tt.title +
+    `')">SỬA</button> </td>
+     </tr>
+  </table>
+  `;
+  var khung = document.getElementById("khungSuaTinTuc");
+  khung.innerHTML = s;
+  khung.style.transform = "scale(1)";
+}
+function suaTinTuc(title) {
+  var tt = layThongTinTinTucTuTable("khungSuaTinTuc");
+  if (!tt) return;
+  // Sửa
+  for (var i = 0; i < listNews.length; i++) {
+    if (listNews[i].title == title) {
+      listNews[i] = tt;
+    }
+  }
+  // Lưu vào localstorage
+  setListNews(listNews);
+
+  // Vẽ lại table
+  addTableTinTuc();
+
+  alert("Sửa " + title + " thành công");
+
+  document.getElementById("khungSuaTinTuc").style.transform = "scale(0)";
 }
