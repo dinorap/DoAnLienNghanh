@@ -31,22 +31,63 @@
       color: red;
       margin-left: 10px;
     }
+
+    .qr-div {
+      text-align: center;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      /* Màu nền cho modal */
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    #qr-code img {
+      width: 500px;
+      margin: 0 auto;
+    }
+
+    .buttqr .confirm {
+      width: 80px;
+      color: #fff;
+      background-color: rgb(2, 218, 2);
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid rgb(2, 218, 2);
+    }
+
+    .buttqr .unconfirm {
+      width: 80px;
+      background-color: red;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid red;
+      color: #fff;
+    }
   </style>
 </head>
 
 <body>
-  <script>
-    addTopNav();
-  </script>
 
-  <section style="min-height: 90vh">
+  <section style="min-height: 100vh">
     <script>
       addHeader();
     </script>
-
     <table class="listSanPham"></table>
     <div id="checkoutModal">
-      <div class="infor0">
+      <div class="qr-div" id="qr-code">
+        <div>
+          <img src="img/qrcode.jpg" alt="">
+          <div class="buttqr">
+            <button type="submit" class="unconfirm" onclick="closeCheck()">Hủy</button>
+            <button type="submit" class="confirm" onclick="thanhtoanqr()">Xác nhận</button>
+          </div>
+        </div>
+      </div>
+      <div class="infor0" id="infor0">
         <div class="infor1">
           <h2 id="modalLabel">Thông tin người mua</h2>
         </div>
@@ -94,7 +135,13 @@
             <div class="form-group">
               <label>Lời nhắn</label>
               <textarea rows="5" style="margin-top:10px;" id="hint"></textarea>
-
+            </div>
+            <div class="form-group">
+              <label for="">Chọn phương thức thanh toán</label><br>
+              <select class="sele" style="width: 50%;" id="thanhtoan">
+                <option>Thanh toán sau khi nhận hàng</option>
+                <option>Thanh toán Online</option>
+              </select>
             </div>
           </form>
         </div>
@@ -191,11 +238,12 @@
         }
       });
     });
-
+    function thanhtoanqr() {
+      thanhToan();
+    }
     addContainTaiKhoan();
     function kiemTraThongTin() {
       var isValid = true;
-
       var hoInput = document.getElementById('ho');
       var tenInput = document.getElementById('ten');
       var emailInput = document.getElementById('email');
@@ -205,7 +253,9 @@
       var phuongXaSelect = document.getElementById('xa');
       var sonhaInput = document.getElementById("sonha")
       var errorMessages = document.querySelectorAll(".error-message");
-
+      var thanhToanSelect = document.getElementById('thanhtoan');
+      var qrCode = document.getElementById('qr-code');
+      var infor0 = document.getElementById('infor0');
       // Xóa bất kỳ thông báo lỗi nào đã hiển thị trước đó
       errorMessages.forEach(function (message) {
         message.textContent = "";
@@ -246,17 +296,18 @@
         errorMessages[3].textContent = "Vui lòng nhập đầy đủ địa chỉ.";
         isValid = false;
       }
-      if (isValid) {
+      if (isValid && thanhToanSelect.value == "Thanh toán sau khi nhận hàng") {
         // Nếu thông tin đã đủ và hợp lệ, thực hiện hành động thanh toán
         thanhToan();
+      }
+      else if (isValid && thanhToanSelect.value == "Thanh toán Online") {
+        qrCode.style.display = "block";
+        infor0.style.display = "none"
       }
       return isValid;
     }
   </script>
-
   <!-- Các phần còn lại của mã HTML -->
-  </section>
-
   </script>
 
   <div class="footer">

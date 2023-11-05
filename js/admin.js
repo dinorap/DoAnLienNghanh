@@ -851,7 +851,8 @@ function getListDonHang(traVeDanhSachSanPham = false) {
         sp: traVeDanhSachSanPham ? danhSachSanPham : sps,
         tongtien: numToString(tongtien),
         ngaygio: x,
-        thongtin: `Họ tên: ${u[i].donhang[j].thongtin.hoTen}, Email: ${u[i].donhang[j].thongtin.email}, Số điện thoại: ${u[i].donhang[j].thongtin.soDienThoai}, Địa chỉ: ${u[i].donhang[j].thongtin.tinh}-${u[i].donhang[j].thongtin.huyen}-${u[i].donhang[j].thongtin.xa},số nhà ${u[i].donhang[j].thongtin.diaChi},Lời Nhắn ${u[i].donhang[j].thongtin.loiNhan}`,
+        thongtin: `Họ tên: ${u[i].donhang[j].thongtin.hoTen}, Email: ${u[i].donhang[j].thongtin.email}, Số điện thoại: ${u[i].donhang[j].thongtin.soDienThoai},
+         Địa chỉ: ${u[i].donhang[j].thongtin.tinh}-${u[i].donhang[j].thongtin.huyen}-${u[i].donhang[j].thongtin.xa},số nhà ${u[i].donhang[j].thongtin.diaChi},Lời Nhắn ${u[i].donhang[j].thongtin.loiNhan},${u[i].donhang[j].thongtin.phuongthuc}`,
         tinhTrang: u[i].donhang[j].tinhTrang,
       });
     }

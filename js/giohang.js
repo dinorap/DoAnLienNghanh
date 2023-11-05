@@ -130,17 +130,21 @@ function addProductToTable(user) {
 
 function xoaSanPhamTrongGioHang(i) {
   if (window.confirm("Xác nhận hủy mua")) {
-    currentuser.products.splice(i, 1);//loại bỏ từ vị trí i 1 sản phẩm 
+    currentuser.products.splice(i, 1); //loại bỏ từ vị trí i 1 sản phẩm
     capNhatMoiThu();
   }
 }
 function openCheckoutModal() {
   var checkoutModal = document.getElementById("checkoutModal");
+  var infor0 = document.getElementById("infor0");
   checkoutModal.style.display = "block";
+  infor0.style.display = "block";
 }
 function closeCheck() {
   var checkoutModal = document.getElementById("checkoutModal");
+  var qrCode = document.getElementById("qr-code");
   checkoutModal.style.display = "none";
+  qrCode.style.display = "none";
   var form = document.getElementById("forminf");
   form.reset();
 }
@@ -188,7 +192,10 @@ function thanhToan() {
     ].text;
   var diaChi = document.getElementById("sonha").value;
   var loiNhan = document.getElementById("hint").value;
-
+  var phuongthuc =
+    document.getElementById("thanhtoan").options[
+      document.getElementById("thanhtoan").selectedIndex
+    ].text;
   // Tạo đối tượng chứa thông tin người mua
   var thongTinMuaHang = {
     hoTen: hoTen,
@@ -199,6 +206,7 @@ function thanhToan() {
     xa: xa,
     diaChi: diaChi,
     loiNhan: loiNhan,
+    phuongthuc: phuongthuc,
   };
 
   if (window.confirm("Thanh toán giỏ hàng ?")) {
