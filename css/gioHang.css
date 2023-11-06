@@ -147,8 +147,7 @@
   }
 
   .infor0 {
-    width: 40%;
-    
+    width: 35%;
     position: absolute;
     top: 45%;
     left: 50%;
@@ -197,6 +196,7 @@
   .form-groupa {
     display: flex;
     justify-content: space-between;
+    margin-top: 5px;
   }
 
   .form-group {

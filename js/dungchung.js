@@ -741,7 +741,7 @@ function addFooter() {
     <!-- ============== Footer ============= -->
     <div class="copy-right">
         <p><a href="index.html">Mobile Phone Store</a> - All rights reserved © 2023 - Designed by
-            <span style="color: #eee; font-weight: bold">group 6th</span></p>
+            <span style="color: #eee; font-weight: bold">group 3rd</span></p>
     </div>
     
     <div
