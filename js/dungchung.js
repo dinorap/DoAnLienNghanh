@@ -808,11 +808,34 @@ function addContainTaiKhoan() {
                             <input name="pass" type="password" required autocomplete="off" />
                             
                         </div> <!-- pass -->
-
+                        <div class="reset">
+                        <div class="nhomk"><input type="checkbox" /><span>Nhớ mật khẩu</span></div>
+                       <div><a href="./quenmk.html"><b>Quên mật khẩu?</b></a></div>
                         
-
+                    </div>
+                      
                         <button type="submit" class="button button-block" />Đăng Nhập</button>
-                        <p class="qmk"><a href="./quenmk.html">Quên mật khẩu?</a></p>
+                        <div class="hr">
+                    <hr>
+                    <p>Tiếp tục với</p>
+                    <hr>
+                </div>
+                        <div class="connect">
+                    <a
+                        href="https://accounts.google.com/v3/signin/identifier?dsh=S1627976351%3A1686453003340009&authuser=0&continue=https%3A%2F%2Fmyaccount.google.com%2F%3Futm_source%3Dsign_in_no_continue%26pli%3D1&ec=GAlAwAE&hl=vi&service=accountsettings&flowName=GlifWebSignIn&flowEntry=AddSession">
+                        <button type="button">
+                            <img src="./img/google_logo1600.png" alt="">
+                            <p>Google </p>
+                        </button>
+                    </a>
+                    <a href="https://www.facebook.com/">
+                        <button type="button">
+                            <img src="./img/facebook-clipart-png-12.png" alt="">
+                            <p>Facebook</p>
+                        </button>
+                    </a>
+
+                </div>
                     </form> <!-- /form -->
 
                 </div> <!-- /log in -->

@@ -831,7 +831,7 @@ function getListDonHang(traVeDanhSachSanPham = false) {
       var sps = "";
       for (var s of u[i].donhang[j].sp) {
         sps +=
-          `<p style="text-align: right">` +
+          `<p style="text-align: center">` +
           (timKiemTheoMa(list_products, s.ma).name + " [" + s.soluong + "]") +
           `</p>`;
       }
@@ -1506,4 +1506,63 @@ function suaTinTuc(title) {
   alert("Sửa " + title + " thành công");
 
   document.getElementById("khungSuaTinTuc").style.transform = "scale(0)";
+}
+function sortNewsTable(loai) {
+  var list = document
+    .getElementsByClassName("tintuc")[0]
+    .getElementsByClassName("table-content")[0];
+
+  var tr = list.getElementsByTagName("tr");
+  var td = tr.getElementsByTagName("td");
+
+  quickSort(tr, 0, tr.length - 1, loai, Number(td[0].innerHTML)); // type cho phép lựa chọn sort theo mã hoặc tên hoặc giá ...
+  decrease = !decrease;
+}
+function sortNewsTable(loai) {
+  var list = document
+    .getElementsByClassName("tintuc")[0]
+    .getElementsByClassName("table-content")[0];
+  var tr = list.getElementsByTagName("tr");
+  quickSort(tr, 0, tr.length - 1, loai, getValueOfTypeInTable_TinTuc); // type cho phép lựa chọn sort theo mã hoặc tên hoặc giá ...
+  decrease = !decrease;
+}
+
+// Lấy giá trị của loại(cột) dữ liệu nào đó trong bảng
+function getValueOfTypeInTable_TinTuc(tr, loai) {
+  var td = tr.getElementsByTagName("td");
+  switch (loai) {
+    case "stt":
+      return Number(td[0].innerHTML);
+    case "title":
+      return td[2].innerHTML.toLowerCase();
+    case "link":
+      return td[3].innerHTML.toLowerCase();
+    case "web":
+      return td[4].innerHTML.toLowerCase();
+    case "time":
+      return td[5].innerHTML.toLowerCase();
+  }
+  return false;
+}
+function timKiemTinTuc(inp) {
+  var kieuTim = document.getElementsByName("kieutimtintuc")[0].value;
+  var text = inp.value;
+  // Lọc
+  var vitriKieuTim = { title: 2, link: 3, web: 4 };
+
+  var listTr_table = document
+    .getElementsByClassName("tintuc")[0]
+    .getElementsByClassName("table-content")[0]
+    .getElementsByTagName("tr");
+  for (var tr of listTr_table) {
+    var td = tr
+      .getElementsByTagName("td")
+      [vitriKieuTim[kieuTim]].innerHTML.toLowerCase();
+    console.log(td);
+    if (td.indexOf(text.toLowerCase()) < 0) {
+      tr.style.display = "none";
+    } else {
+      tr.style.display = "";
+    }
+  }
 }

@@ -27,7 +27,9 @@
 </head>
 
 <body>
-  <header>
+  <header style="
+  text-align: center;
+">
     <h2>Mobile Store - Admin</h2>
   </header>
 
@@ -377,22 +379,22 @@
       <table class="table-header">
         <tr>
           <!-- Theo độ rộng của table content -->
-          <th title="Sắp xếp" style="width: 5%" onclick="sortKhachHangTable('stt')">
+          <th title="Sắp xếp" style="width: 5%" onclick="sortNewsTable('stt')">
             Stt <i class="fa fa-sort"></i>
           </th>
-          <th title="Sắp xếp" style="width: 10%" onclick="sortKhachHangTable('hoten')">
+          <th title="Sắp xếp" style="width: 10%">
             Ảnh <i class="fa fa-sort"></i>
           </th>
-          <th title="Sắp xếp" style="width: 30%" onclick="sortKhachHangTable('email')">
+          <th title="Sắp xếp" style="width: 30%" onclick="sortNewsTable('title')">
             Title <i class="fa fa-sort"></i>
           </th>
-          <th title="Sắp xếp" style="width: 30%" onclick="sortKhachHangTable('taikhoan')">
+          <th title="Sắp xếp" style="width: 30%" onclick="sortNewsTable('link')">
             Link <i class="fa fa-sort"></i>
           </th>
-          <th title="Sắp xếp" style="width: 10%" onclick="sortKhachHangTable('taikhoan')">
+          <th title="Sắp xếp" style="width: 10%" onclick="sortNewsTable('web')">
             Web <i class="fa fa-sort"></i>
           </th>
-          <th title="Sắp xếp" style="width: 5%" onclick="sortKhachHangTable('taikhoan')">
+          <th title="Sắp xếp" style="width: 5%" onclick="sortNewsTable('time')">
             Time <i class="fa fa-sort"></i>
           </th>
           <th style="width: 10%">Hành động</th>
@@ -402,12 +404,12 @@
       <div class="table-content"></div>
 
       <div class="table-footer">
-        <select name="kieuTimKhachHang">
-          <option value="ten">Tìm theo họ tên</option>
-          <option value="email">Tìm theo email</option>
-          <option value="taikhoan">Tìm theo tài khoản</option>
+        <select name="kieutimtintuc">
+          <option value="title">Tìm theo title</option>
+          <option value="link">Tìm theo link</option>
+          <option value="web">Tìm theo web</option>
         </select>
-        <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemNguoiDung(this)" />
+        <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemTinTuc(this)" />
         <button onclick="document.getElementById('KhungThemTinTuc').style.transform = 'scale(1)';">
           <i class="fa fa-plus-square"></i> Thêm tin tức
         </button>
