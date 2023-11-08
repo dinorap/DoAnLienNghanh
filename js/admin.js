@@ -776,16 +776,16 @@ function addTableDonHang() {
             <td style="width: 15%">` +
       d.sp +
       `</td>
-            <td style="width: 15%">` +
+            <td style="width: 10%">` +
       d.tongtien +
       `</td>
             <td style="width: 10%">` +
       d.ngaygio +
       `</td>
-            <td style="width: 15%">` +
+            <td style="width: 26%">` +
       d.thongtin +
       `</td>
-            <td style="width: 10%">` +
+            <td style="width: 7%">` +
       d.tinhTrang +
       `</td>
             <td style="width: 10%">
@@ -826,7 +826,24 @@ function getListDonHang(traVeDanhSachSanPham = false) {
       }
       // Ngày giờ
       var x = new Date(u[i].donhang[j].ngaymua).toLocaleString();
-
+      if (u[i].donhang[j].thongtin.magiamgia == "giam10%") {
+        tongtien -= tongtien / 10;
+      }
+      if (u[i].donhang[j].thongtin.magiamgia == "giam20%") {
+        tongtien -= (tongtien / 100) * 20;
+      }
+      if (u[i].donhang[j].thongtin.magiamgia == "giam30%") {
+        tongtien -= (tongtien / 100) * 30;
+      }
+      if (u[i].donhang[j].thongtin.magiamgia == "giam40%") {
+        tongtien -= (tongtien / 100) * 40;
+      }
+      if (u[i].donhang[j].thongtin.magiamgia == "giam50%") {
+        tongtien -= tongtien / 2;
+      }
+      if (u[i].donhang[j].thongtin.magiamgia == "giam100%") {
+        tongtien = 0;
+      }
       // Các sản phẩm - dạng html
       var sps = "";
       for (var s of u[i].donhang[j].sp) {
@@ -853,7 +870,7 @@ function getListDonHang(traVeDanhSachSanPham = false) {
         tongtien: numToString(tongtien),
         ngaygio: x,
         thongtin: `Họ tên: ${u[i].donhang[j].thongtin.hoTen}, Email: ${u[i].donhang[j].thongtin.email}, Số điện thoại: ${u[i].donhang[j].thongtin.soDienThoai},
-         Địa chỉ: ${u[i].donhang[j].thongtin.tinh}-${u[i].donhang[j].thongtin.huyen}-${u[i].donhang[j].thongtin.xa},số nhà ${u[i].donhang[j].thongtin.diaChi},Lời Nhắn ${u[i].donhang[j].thongtin.loiNhan},${u[i].donhang[j].thongtin.phuongthuc}`,
+         Địa chỉ: ${u[i].donhang[j].thongtin.tinh}-${u[i].donhang[j].thongtin.huyen}-${u[i].donhang[j].thongtin.xa},số nhà ${u[i].donhang[j].thongtin.diaChi},Lời Nhắn ${u[i].donhang[j].thongtin.loiNhan},${u[i].donhang[j].thongtin.phuongthuc},Mã giảm giá :${u[i].donhang[j].thongtin.magiamgia}`,
         tinhTrang: u[i].donhang[j].tinhTrang,
       });
     }

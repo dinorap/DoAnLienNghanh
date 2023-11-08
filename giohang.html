@@ -35,7 +35,9 @@
 
   <section style="min-height: 100vh">
     <script>
+      addTopNav();
       addHeader();
+
     </script>
     <table class="listSanPham"></table>
     <div id="checkoutModal">
@@ -100,7 +102,7 @@
             <div class="form-groupa">
               <div style="width: 45%;">
                 <label for="">Chọn phương thức thanh toán</label><br>
-                <select class="sele" style="width: 100%; margin-top: 4px;" id=" thanhtoan">
+                <select class="sele" style="width: 100%; margin-top: 4px;" id="thanhtoan">
                   <option>Thanh toán sau khi nhận hàng</option>
                   <option>Thanh toán Online</option>
                 </select>
@@ -223,6 +225,7 @@
       var thanhToanSelect = document.getElementById('thanhtoan');
       var qrCode = document.getElementById('qr-code');
       var infor0 = document.getElementById('infor0');
+      var magiamgia = document.getElementById('magiamgia')
       // Xóa bất kỳ thông báo lỗi nào đã hiển thị trước đó
       errorMessages.forEach(function (message) {
         message.textContent = "";
@@ -263,6 +266,32 @@
         errorMessages[3].textContent = "Vui lòng nhập đầy đủ địa chỉ.";
         isValid = false;
       }
+      switch (magiamgia.value) {
+        case "giam10%":
+          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 10% tổng giá trị đơn hàng");
+          break
+        case "giam20%":
+          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 20% tổng giá trị đơn hàng");
+          break
+        case "giam30%":
+          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 30% tổng giá trị đơn hàng");
+          break
+        case "giam40%":
+          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 40% tổng giá trị đơn hàng");
+          break
+        case "giam50%":
+          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 50% tổng giá trị đơn hàng");
+          break
+        case "giam100%":
+          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 100% tổng giá trị đơn hàng");
+          break
+        case "":
+          break
+        default:
+          alert("Mã giảm giá không tồn tại hoạc đã quá hạn khuyến mãi");
+          isValid = false;
+      }
+
       if (isValid && thanhToanSelect.value == "Thanh toán sau khi nhận hàng") {
         // Nếu thông tin đã đủ và hợp lệ, thực hiện hành động thanh toán
         thanhToan();

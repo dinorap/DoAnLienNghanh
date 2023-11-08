@@ -196,6 +196,7 @@ function thanhToan() {
     document.getElementById("thanhtoan").options[
       document.getElementById("thanhtoan").selectedIndex
     ].text;
+  var magiamgia = document.getElementById("magiamgia").value;
   // Tạo đối tượng chứa thông tin người mua
   var thongTinMuaHang = {
     hoTen: hoTen,
@@ -207,6 +208,7 @@ function thanhToan() {
     diaChi: diaChi,
     loiNhan: loiNhan,
     phuongthuc: phuongthuc,
+    magiamgia: magiamgia,
   };
 
   if (window.confirm("Thanh toán giỏ hàng ?")) {
