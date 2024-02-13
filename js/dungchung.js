@@ -123,7 +123,7 @@ function animateCartNumber() {
   }, 1200);
 }
 
-function themVaoGioHang(masp, tensp) {
+function themVaoGioHang(masp, tensp, mausac, rom) {
   var user = getCurrentUser();
   if (!user) {
     addAlertBoxtop("Bạn cần đăng nhập để mua hàng !", "#aa0000", "#fff", 10000);
@@ -145,7 +145,11 @@ function themVaoGioHang(masp, tensp) {
 
   for (var i = 0; i < user.products.length; i++) {
     // check trùng sản phẩm
-    if (user.products[i].ma == masp) {
+    if (
+      user.products[i].ma == masp &&
+      user.products[i].mausac == mausac &&
+      user.products[i].rom == rom
+    ) {
       user.products[i].soluong++;
       daCoSanPham = true;
       break;
@@ -155,9 +159,12 @@ function themVaoGioHang(masp, tensp) {
   if (!daCoSanPham) {
     // nếu không trùng thì mới thêm sản phẩm vào user.products
     user.products.push({
+      madon: masp + mausac + rom,
       ma: masp,
       soluong: 1,
       date: t,
+      mausac: mausac,
+      rom: rom,
     });
   }
 
@@ -607,7 +614,13 @@ function addTags(nameTag, link) {
 
 // Thêm sản phẩm vào trang
 function addProduct(p, ele, returnString) {
+  var mauArray = p.detail.color.split(" , ");
+  var selectedColor = mauArray[0]; // Lấy màu đầu tiên trong mảng làm màu được chọn lần đầu
+
+  var romArray = p.detail.rom.split(" , "); // Mảng các dung lượng bộ nhớ trong
+  var selectedRom = romArray[0];
   promo = new Promo(p.promo.name, p.promo.value); // class Promo
+  detail = new Detail(selectedColor, selectedRom);
   product = new Product(
     p.masp,
     p.name,
@@ -615,7 +628,8 @@ function addProduct(p, ele, returnString) {
     p.price,
     p.star,
     p.rateCount,
-    promo
+    promo,
+    detail
   ); // Class product
 
   return addToWeb(product, ele, returnString);
@@ -726,8 +740,11 @@ function addHeader() {
                     </a>
                 </div> -->
             </div><!-- End Tools Member -->
+            
         </div> <!-- End Content -->
-    </div> <!-- End Header -->`);
+        
+    </div> 
+    <!-- End Header -->`);
 }
 
 function addFooter() {
@@ -1131,5 +1148,138 @@ function tintuc() {
     });
   } else {
     console.log("Không có dữ liệu trong localStorage.");
+  }
+}
+
+//chatgpt
+function addChatbot() {
+  document.write(`
+  <button class="chatbot-toggler">
+        <span class="material-symbols-rounded"><i class="fas fa-comment-alt"></i></span>
+        <span class="material-symbols-outlined"><i class="fas fa-times"></i></span>
+    </button>
+    <div class="chatbot">
+        <header>
+            <h2>Chatbot</h2>
+            <span class="close-btn material-symbols-outlined"><i class="fas fa-times"></i></span>
+        </header>
+        <ul class="chatbox">
+            <li class="chat incoming">
+                <span class="material-symbols-outlined"><i class="fas fa-robot"></i></span>
+                <p>Chào bạn 👋<br />Tôi có thể giúp được gì cho bạn ngày hôm nay?</p>
+            </li>
+        </ul>
+        <div class="chat-input" id="chatInputContainer">
+            <textarea placeholder="Enter a message..." required="required" spellcheck="false"
+                oninput="resizeTextArea()"></textarea>
+            <span class="material-symbols-rounded" id="send-btn"><i class="fas fa-share"></i></span>
+        </div>
+    </div>
+    `);
+
+  const chatbotToggler = document.querySelector(".chatbot-toggler");
+  const closeBtn = document.querySelector(".close-btn");
+  const chatbox = document.querySelector(".chatbox");
+  const chatInput = document.querySelector(".chat-input textarea");
+  const sendChatBtn = document.querySelector(".chat-input span");
+
+  let userMessage = null; // Variable to store user's message
+  const API_KEY = "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"; // Paste your API key here
+
+  const createChatLi = (message, className) => {
+    // Create a chat <li> element with passed message and className
+    const chatLi = document.createElement("li");
+    chatLi.classList.add("chat", `${className}`);
+    let chatContent =
+      className === "outgoing"
+        ? `<p></p>`
+        : `<span class="material-symbols-outlined"><i class="fas fa-robot"></i></span><p></p>`;
+    chatLi.innerHTML = chatContent;
+    chatLi.querySelector("p").textContent = message;
+    return chatLi; // return chat <li> element
+  };
+
+  const generateResponse = (chatElement) => {
+    const API_URL = "https://api.openai.com/v1/chat/completions";
+    const messageElement = chatElement.querySelector("p");
+
+    // Define the properties and message for the API request
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: userMessage }],
+      }),
+    };
+
+    // Send POST request to API, get response and set the reponse as paragraph text
+    fetch(API_URL, requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        messageElement.textContent = data.choices[0].message.content.trim();
+      })
+      .catch(() => {
+        messageElement.classList.add("error");
+        messageElement.textContent =
+          "Oops! Something went wrong. Please try again.";
+      })
+      .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+  };
+
+  const handleChat = () => {
+    userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
+    if (!userMessage) return;
+
+    // Clear the input textarea and set its height to default
+    chatInput.value = "";
+
+    // Append the user's message to the chatbox
+    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+
+    setTimeout(() => {
+      // Display "Thinking..." message while waiting for the response
+      const incomingChatLi = createChatLi("Thinking...", "incoming");
+      chatbox.appendChild(incomingChatLi);
+      chatbox.scrollTo(0, chatbox.scrollHeight);
+      generateResponse(incomingChatLi);
+    }, 600);
+  };
+
+  chatInput.addEventListener("input", () => {
+    // Adjust the height of the input textarea based on its content
+  });
+
+  chatInput.addEventListener("keydown", (e) => {
+    // If Enter key is pressed without Shift key and the window
+    // width is greater than 800px, handle the chat
+    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+      e.preventDefault();
+      handleChat();
+    }
+  });
+
+  sendChatBtn.addEventListener("click", handleChat);
+  closeBtn.addEventListener("click", () =>
+    document.body.classList.remove("show-chatbot")
+  );
+  chatbotToggler.addEventListener("click", () =>
+    document.body.classList.toggle("show-chatbot")
+  );
+}
+function resizeTextArea() {
+  const textarea = document.querySelector(".chat-input textarea");
+  const chatInputContainer = document.getElementById("chatInputContainer");
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight - 30 + "px";
+
+  if (textarea.scrollHeight > 100) {
+    chatInputContainer.classList.add("expanded");
+  } else {
+    chatInputContainer.classList.remove("expanded");
   }
 }

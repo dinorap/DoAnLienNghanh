@@ -512,3 +512,52 @@
   .comment .hoi {
     margin-top: 30px;
   }
+
+/* CSS cho các button trong phần choosecolor */
+.choosecolor button {
+    background-color: white;
+    border-radius: 3px;
+    border: solid 1px;
+    padding: 8px 16px; /* Khoảng cách giữa nội dung và viền */
+    margin-right: 10px; /* Khoảng cách giữa các button */
+    font-size: 14px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ chuột khi di chuyển vào button */
+}
+
+/* CSS khi di chuột vào button */
+.choosecolor button:hover {
+    background-color: #ccc; /* Màu nền thay đổi khi di chuột vào */
+    color: #000; /* Màu chữ thay đổi khi di chuột vào */
+}
+
+
+
+
+/* CSS khi di chuột vào button */
+.choose-rom button:hover {
+    background-color: #ccc; /* Màu nền thay đổi khi di chuột vào */
+    color: #000; /* Màu chữ thay đổi khi di chuột vào */
+}
+
+/* CSS cho button được chọn */
+.selected {
+    border-color: #2f80ed; /* Viền màu xanh khi button được chọn */
+    color: #2f80ed; /* Chữ màu xanh khi button được chọn */
+}
+
+
+.choose-rom button {
+    background-color: white;
+    border-radius: 3px;
+    border: solid 1px;
+    padding: 8px 16px; /* Khoảng cách giữa nội dung và viền */
+    margin-right: 10px; /* Khoảng cách giữa các button */
+    font-size: 14px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ chuột khi di chuyển vào button */
+}
+.choosecolor{
+    margin-bottom: 10px;
+}
+.choose-rom{
+    margin-bottom: 10px;
+}

@@ -52,8 +52,11 @@ function Promo(name, value) {
     return label;
   };
 }
-
-function Product(masp, name, img, price, star, rateCount, promo) {
+function Detail(mau, rom) {
+  this.mau = mau;
+  this.rom = rom;
+}
+function Product(masp, name, img, price, star, rateCount, promo, detail) {
   this.masp = masp;
   this.img = img;
   this.name = name;
@@ -61,6 +64,7 @@ function Product(masp, name, img, price, star, rateCount, promo) {
   this.star = star;
   this.rateCount = rateCount;
   this.promo = promo;
+  this.detail = detail;
 }
 
 function addToWeb(p, ele, returnString) {
@@ -124,6 +128,10 @@ function addToWeb(p, ele, returnString) {
     p.masp +
     `', '` +
     p.name +
+    `', '` +
+    p.detail.mau +
+    `', '` +
+    p.detail.rom +
     `'); return false;">
 					<span class="tooltiptext" style="font-size: 15px;">Thêm vào giỏ</span>
 					+

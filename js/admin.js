@@ -372,13 +372,16 @@ function layThongTinSanPhamTuTable(id) {
   var ram = tr[16]
     .getElementsByTagName("td")[1]
     .getElementsByTagName("input")[0].value;
-  var rom = tr[17]
+  var color = tr[17]
     .getElementsByTagName("td")[1]
     .getElementsByTagName("input")[0].value;
-  var microUSB = tr[18]
+  var rom = tr[18]
     .getElementsByTagName("td")[1]
     .getElementsByTagName("input")[0].value;
-  var battery = tr[19]
+  var microUSB = tr[19]
+    .getElementsByTagName("td")[1]
+    .getElementsByTagName("input")[0].value;
+  var battery = tr[20]
     .getElementsByTagName("td")[1]
     .getElementsByTagName("input")[0].value;
 
@@ -416,6 +419,7 @@ function layThongTinSanPhamTuTable(id) {
         camaraFront: camaraFront,
         cpu: cpu,
         ram: ram,
+        color: color,
         rom: rom,
         microUSB: microUSB,
         battery: battery,
@@ -672,6 +676,12 @@ function addKhungSuaSanPham(masp) {
     `"></td>
         </tr>
         <tr>
+            <td>Màu sắc:</td>
+            <td><input type="text" value="` +
+    sp.detail.color +
+    `"></td>
+        </tr>
+        <tr>
             <td>Bộ nhớ trong:</td>
             <td><input type="text" value="` +
     sp.detail.rom +
@@ -849,7 +859,14 @@ function getListDonHang(traVeDanhSachSanPham = false) {
       for (var s of u[i].donhang[j].sp) {
         sps +=
           `<p style="text-align: center">` +
-          (timKiemTheoMa(list_products, s.ma).name + " [" + s.soluong + "]") +
+          (timKiemTheoMa(list_products, s.ma).name +
+            " " +
+            s.mausac +
+            " " +
+            s.rom +
+            " [" +
+            s.soluong +
+            "]") +
           `</p>`;
       }
 

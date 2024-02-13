@@ -237,3 +237,34 @@
 		/* ======= End Tools Member ======= */
 	/* ======= End Content ========= */
 /* ======= End header ======== */
+
+ .menu {
+            display: flex;
+            align-items: center;
+			padding: 10px;
+			background-color: rgb(1, 247, 255);
+		
+        }
+
+        .menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu ul li {
+			padding-right: 28.7px;
+            margin-right: 10px;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+		.menu img {
+			height: 20px;
+			width: auto;
+			object-fit: cover;
+			vertical-align: middle;
+		}

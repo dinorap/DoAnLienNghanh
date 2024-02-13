@@ -1,4 +1,4 @@
-var nameProduct, maProduct, sanPhamHienTai; // Tên sản phẩm trong trang này,
+var nameProduct, maProduct, sanPhamHienTai, selectedRom, selectedColor; // Tên sản phẩm trong trang này,
 // là biến toàn cục để có thể dùng ở bát cứ đâu trong trang
 // không cần tính toán lấy tên từ url nhiều lần
 
@@ -89,16 +89,91 @@ function phanTich_URL_chiTietSanPham() {
 
   // Cập nhật thông số
   var info = document.getElementsByClassName("info")[0];
-  var s = addThongSo("Màn hình", sanPhamHienTai.detail.screen);
-  s += addThongSo("Hệ điều hành", sanPhamHienTai.detail.os);
-  s += addThongSo("Camara sau", sanPhamHienTai.detail.camara);
-  s += addThongSo("Camara trước", sanPhamHienTai.detail.camaraFront);
-  s += addThongSo("CPU", sanPhamHienTai.detail.cpu);
-  s += addThongSo("RAM", sanPhamHienTai.detail.ram);
-  s += addThongSo("Bộ nhớ trong", sanPhamHienTai.detail.rom);
-  s += addThongSo("Thẻ nhớ", sanPhamHienTai.detail.microUSB);
-  s += addThongSo("Dung lượng pin", sanPhamHienTai.detail.battery);
-  info.innerHTML = s;
+  var mauArray = sanPhamHienTai.detail.color.split(" , ");
+  selectedColor = mauArray[0]; // Lấy màu đầu tiên trong mảng làm màu được chọn lần đầu
+
+  var romArray = sanPhamHienTai.detail.rom.split(" , "); // Mảng các dung lượng bộ nhớ trong
+  selectedRom = romArray[0]; // Lấy dung lượng bộ nhớ đầu tiên trong mảng làm dung lượng được chọn lần đầu
+
+  // Cập nhật thông tin sản phẩm khi trang được load lần đầu
+  updateProductInfo(selectedColor, selectedRom);
+
+  var chosecolorDiv = document.querySelector(".choosecolor");
+  chosecolorDiv.innerHTML = "";
+
+  // Tạo button cho mỗi màu và thêm vào div chosecolor
+  mauArray.forEach(function (color, index) {
+    var button = document.createElement("button");
+    button.classList.add("button1");
+    button.textContent = color;
+    if (index === 0) {
+      button.classList.add("selected");
+    }
+    // Lắng nghe sự kiện khi click vào nút màu
+    button.addEventListener("click", function () {
+      selectedColor = color;
+      updateProductInfo(selectedColor, selectedRom);
+      toggleSelection(button, document.querySelectorAll("#row1 .button1"));
+    });
+
+    // Thêm nút vào div chosecolor
+    if (mauArray.length > 1) {
+      chosecolorDiv.appendChild(button);
+    }
+  });
+
+  var chooseRomDiv = document.querySelector(".choose-rom");
+  chooseRomDiv.innerHTML = "";
+
+  // Tạo button cho mỗi dung lượng bộ nhớ trong và thêm vào div choose-rom
+  romArray.forEach(function (rom, index) {
+    var button = document.createElement("button");
+    button.textContent = rom;
+    button.classList.add("button1");
+    if (index === 0) {
+      button.classList.add("selected");
+    }
+    // Lắng nghe sự kiện khi click vào nút bộ nhớ trong
+    button.addEventListener("click", function () {
+      selectedRom = rom;
+      updateProductInfo(selectedColor, selectedRom);
+      toggleSelection(button, document.querySelectorAll("#row2 .button1"));
+    });
+
+    // Thêm nút vào div choose-rom
+    if (mauArray.length > 1) {
+      chooseRomDiv.appendChild(button);
+    }
+  });
+
+  function toggleSelection(selectedButton, buttons) {
+    buttons.forEach((button) => {
+      button.classList.remove("selected");
+    });
+    selectedButton.classList.add("selected");
+  }
+
+  // Hàm cập nhật thông số sản phẩm dựa trên màu và dung lượng bộ nhớ trong được chọn
+  function updateProductInfo(selectedColor, selectedRom) {
+    var s = "";
+
+    // Thêm thông số sản phẩm dựa trên màu đã chọn
+    s += addThongSo("Màn hình", sanPhamHienTai.detail.screen);
+    s += addThongSo("Hệ điều hành", sanPhamHienTai.detail.os);
+    s += addThongSo("Camara sau", sanPhamHienTai.detail.camara);
+    s += addThongSo("Camara trước", sanPhamHienTai.detail.camaraFront);
+    s += addThongSo("CPU", sanPhamHienTai.detail.cpu);
+    s += addThongSo("RAM", sanPhamHienTai.detail.ram);
+
+    // Thêm dung lượng bộ nhớ trong đã chọn vào thông số sản phẩm
+    s += addThongSo("Bộ nhớ trong", selectedRom);
+
+    s += addThongSo("Thẻ nhớ", sanPhamHienTai.detail.microUSB);
+    s += addThongSo("Màu", selectedColor); // Thêm màu được chọn vào bảng thông số
+    s += addThongSo("Dung lượng pin", sanPhamHienTai.detail.battery);
+
+    info.innerHTML = s; // Hiển thị thông tin sản phẩm lên trang web
+  }
 
   // Cập nhật hình
   var hinh = divChiTiet.getElementsByClassName("picture")[0];

@@ -147,7 +147,13 @@
   }
 
   .infor0 {
-    width: 35%;
+    width: 60%;
+    background-color: #fff;
+    padding: 20px;
+  }
+  .infor_total{
+    display: flex;
+    width: 60%;
     position: absolute;
     top: 45%;
     left: 50%;
@@ -157,13 +163,75 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    gap: 20px;
   }
-
+  .infor_end{
+    width: 45%;
+    background-color: #fff;
+    /* Màu nền cho modal */
+    padding: 20px;
+    border: 2px solid black;
+  }
+  .end_infor1{
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    margin-top:15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(231, 231, 231);
+  }
+  .promo{
+    margin-top: 15px;
+    width: 94.5%;
+  }
+  .promo input{
+    height: 15px;
+    padding: 10px;
+  }
+  .promo-button{
+    margin-top: 17px;
+    width: 100%;
+   
+  }
+  .promo-button button{
+    width: 100%;
+    padding: 10px;
+  }
+  .payment-options{
+    margin-top:15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(231, 231, 231);
+  }
+  .thanhtoan-button button{
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: red;
+    margin-top: 14px;
+  }
   .infor1 {
     text-align: center;
     margin-bottom: 10px;
   }
-
+  .close-button {
+    font-size: 15px;
+    position: absolute;
+    top: 5px;
+    z-index: 1;
+    right: 10px;
+    border: none;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border-radius: 50%;
+    width: 30px; /* Điều chỉnh giá trị chiều rộng theo nhu cầu của bạn */
+    height: 30px; /* Điều chỉnh giá trị chiều cao theo nhu cầu của bạn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  
   .butt {
     float: right;
 
@@ -228,9 +296,10 @@
   }
 
   .qr-div {
+    display: none;
     text-align: center;
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -241,7 +310,7 @@
   }
 
   #qr-code img {
-    width: 500px;
+    width: 400px;
     margin: 0 auto;
   }
 

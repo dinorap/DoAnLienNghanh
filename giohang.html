@@ -41,87 +41,108 @@
     </script>
     <table class="listSanPham"></table>
     <div id="checkoutModal">
-      <div class="qr-div" id="qr-code">
-        <div>
-          <img src="img/qrcode.jpg" alt="">
-          <div class="buttqr">
-            <button type="submit" class="unconfirm" onclick="closeCheck()">Hủy</button>
-            <button type="submit" class="confirm" onclick="thanhtoanqr()">Xác nhận</button>
+
+
+      <div class="infor_total" id="infor_total">
+        <button class="close-button" onclick="closeCheck()"><b>X</b></button>
+        <div class="infor0" id="infor0">
+          <div class="infor1">
+            <h2 id="modalLabel">Thông tin người mua</h2>
           </div>
-        </div>
-      </div>
-      <div class="infor0" id="infor0">
-        <div class="infor1">
-          <h2 id="modalLabel">Thông tin người mua</h2>
-        </div>
-        <hr>
-        <div class="infor2">
-          <form id="forminf">
-            <div class="form-group">
-              <label for="ho-ten">Họ và tên:</label><br>
-              <input type="text" placeholder="Họ" class="a" style="margin-right: 20px" id="ho">
-              <input type="text" placeholder="Tên" class="a" id="ten">
-              <div class="error-message"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email:</label><br>
-              <input type="email" placeholder="Email" id="email">
-              <div class="error-message"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="so-dien-thoai">Số điện thoại:</label><br>
-              <input type="text" placeholder="Số điện thoại" id="sodienthoai">
-              <div class="error-message"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="dia-chi">Địa chỉ:</label>
-              <div class="form-groupa">
-                <select class="sele" id="tinh">
-                  <option disabled selected>--Chọn Tỉnh/Thành phố--</option>
-                </select>
-                <select class="sele" id="huyen">
-                  <option disabled selected>--Chọn Huyện/Quận--</option>
-                </select>
-
-                <select class="sele" id="xa">
-                  <option disabled selected>--Chọn Phường/Xã--</option>
-                </select>
+          <hr>
+          <div class="infor2">
+            <form id="forminf">
+              <div class="form-group">
+                <label for="ho-ten">Họ và tên:</label><br>
+                <input type="text" placeholder="Họ" class="a" style="margin-right: 20px" id="ho">
+                <input type="text" placeholder="Tên" class="a" id="ten">
+                <div class="error-message"></div>
               </div>
-              <div class=" error-message">
-              </div>
-              <input id="sonha" type="text" placeholder="Số nhà">
 
-            </div>
-            <div class="form-group">
-              <label>Lời nhắn</label>
-              <textarea rows="5" style="margin-top:10px;" id="hint"></textarea>
-            </div>
-            <div class="form-groupa">
-              <div style="width: 45%;">
-                <label for="">Chọn phương thức thanh toán</label><br>
-                <select class="sele" style="width: 100%; margin-top: 4px;" id="thanhtoan">
-                  <option>Thanh toán sau khi nhận hàng</option>
-                  <option>Thanh toán Online</option>
-                </select>
+              <div class="form-group">
+                <label for="email">Email:</label><br>
+                <input type="email" placeholder="Email" id="email">
+                <div class="error-message"></div>
               </div>
-              <div style="width: 45%;">
-                <label for="">Nhập mã khuyến mãi</label>
-                <input type="text" placeholder="Mã khuyến mãi" id="magiamgia">
+
+              <div class="form-group">
+                <label for="so-dien-thoai">Số điện thoại:</label><br>
+                <input type="text" placeholder="Số điện thoại" id="sodienthoai">
+                <div class="error-message"></div>
               </div>
-            </div>
-          </form>
+
+              <div class="form-group">
+                <label for="dia-chi">Địa chỉ:</label>
+                <div class="form-groupa">
+                  <select class="sele" id="tinh">
+                    <option disabled selected>--Chọn Tỉnh/Thành phố--</option>
+                  </select>
+                  <select class="sele" id="huyen">
+                    <option disabled selected>--Chọn Huyện/Quận--</option>
+                  </select>
+
+                  <select class="sele" id="xa">
+                    <option disabled selected>--Chọn Phường/Xã--</option>
+                  </select>
+                </div>
+                <div class=" error-message">
+                </div>
+                <input id="sonha" type="text" placeholder="Số nhà">
+
+              </div>
+              <div class="form-group">
+                <label>Lời nhắn</label>
+                <textarea rows="5" style="margin-top:10px;" id="hint"></textarea>
+              </div>
+
+              <div>
+                <p>Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng .Tăng trải nghiệm dịch vụ website và cho
+                  các mục đích được miêu tả trong chính sách của chúng tôi</p>
+              </div>
+            </form>
+          </div>
+
         </div>
-        <div class="butt">
-          <button type="submit" class="unconfirm" onclick="closeCheck()">Hủy</button>
-          <button type="submit" class="confirm" onclick="kiemTraThongTin()">Xác nhận</button>
-        </div>
+        <div class="infor_end" id="infor_end"></div>
       </div>
     </div>
 
   </section>
+  <script>
+
+    function getTextOfSelectedPaymentMethod() {
+      // Lấy tất cả các phần tử input radio có name là "paymentMethod"
+      var radioInputs = document.getElementsByName('paymentMethod');
+
+      // Duyệt qua tất cả các input radio để tìm input radio được chọn
+      for (var i = 0; i < radioInputs.length; i++) {
+        if (radioInputs[i].checked) {
+          // Nếu input radio được chọn, lấy giá trị của phần tử <b> trong <label>
+          var labelElement = radioInputs[i].closest('label');
+          var boldElement = labelElement.querySelector('b');
+
+          if (boldElement) {
+            return boldElement.textContent || boldElement.innerText;
+          }
+        }
+      }
+
+      // Nếu không có input radio nào được chọn, trả về null hoặc giá trị mặc định tùy vào yêu cầu của bạn
+      return null;
+    }
+
+    // Sử dụng hàm để lấy text của phần tử <b> tương ứng với radio được chọn
+    // Hiển thị text của phần tử <b> tương ứng
+
+    function showContent(paymentMethod) {
+      // Ẩn tất cả các nội dung trước khi hiển thị nội dung mới
+      document.getElementById("bankTransferContent").style.display = "none";
+      document.getElementById("cashOnDeliveryContent").style.display = "none";
+      document.getElementById("qrMomoContent").style.display = "none";
+      // Hiển thị nội dung cho lựa chọn được chọn
+      document.getElementById(paymentMethod + "Content").style.display = "block";
+    }
+  </script>
   <!-- End Section -->
   <script>
 
@@ -203,10 +224,10 @@
           xa(xaURL, xaSelect, "--Chọn Phường/Xã--", selectedHuyen);
         } else {
           xaSelect.innerHTML = "--Chọn Phường/Xã--"; // Xóa dữ liệu xã nếu không có huyện được chọn
-
         }
       });
     });
+
     function thanhtoanqr() {
       thanhToan();
     }
@@ -223,8 +244,7 @@
       var sonhaInput = document.getElementById("sonha")
       var errorMessages = document.querySelectorAll(".error-message");
       var thanhToanSelect = document.getElementById('thanhtoan');
-      var qrCode = document.getElementById('qr-code');
-      var infor0 = document.getElementById('infor0');
+
       var magiamgia = document.getElementById('magiamgia')
       // Xóa bất kỳ thông báo lỗi nào đã hiển thị trước đó
       errorMessages.forEach(function (message) {
@@ -266,40 +286,39 @@
         errorMessages[3].textContent = "Vui lòng nhập đầy đủ địa chỉ.";
         isValid = false;
       }
-      switch (magiamgia.value) {
-        case "giam10%":
-          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 10% tổng giá trị đơn hàng");
-          break
-        case "giam20%":
-          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 20% tổng giá trị đơn hàng");
-          break
-        case "giam30%":
-          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 30% tổng giá trị đơn hàng");
-          break
-        case "giam40%":
-          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 40% tổng giá trị đơn hàng");
-          break
-        case "giam50%":
-          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 50% tổng giá trị đơn hàng");
-          break
-        case "giam100%":
-          alert("Bạn đã áp dụng mã giảm giá " + magiamgia.value + " bạn được giảm 100% tổng giá trị đơn hàng");
-          break
-        case "":
-          break
-        default:
-          alert("Mã giảm giá không tồn tại hoạc đã quá hạn khuyến mãi");
-          isValid = false;
+      var paymentMethods = document.getElementsByName('paymentMethod');
+      var selectedMethod = false;
+      for (var i = 0; i < paymentMethods.length; i++) {
+        if (paymentMethods[i].checked) {
+          selectedMethod = true;
+          break;
+        }
       }
 
-      if (isValid && thanhToanSelect.value == "Thanh toán sau khi nhận hàng") {
-        // Nếu thông tin đã đủ và hợp lệ, thực hiện hành động thanh toán
-        thanhToan();
+
+      if (!selectedMethod) {
+        alert('Vui lòng chọn một phương thức thanh toán trước khi đặt hàng.');
+        isValid = false;
+      } else {
+        if (isValid && document.querySelector('input[name="paymentMethod"][value="bankTransfer"]').checked) {
+          thanhToan();
+        }
+        if (isValid && document.querySelector('input[name="paymentMethod"][value="cashOnDelivery"]').checked) {
+          thanhToan();
+        }
+        // Hiển thị thông báo "Momo xin chào!" nếu chọn thanh toán bằng Momo
+        if (isValid && document.querySelector('input[name="paymentMethod"][value="qrMomo"]').checked) {
+          thanhToanqr(hoInput.value + tenInput.value, soDienThoaiInput.value)
+        }
       }
-      else if (isValid && thanhToanSelect.value == "Thanh toán Online") {
-        qrCode.style.display = "block";
-        infor0.style.display = "none"
-      }
+      // if (isValid && thanhToanSelect.value == "Thanh toán sau khi nhận hàng") {
+      //   // Nếu thông tin đã đủ và hợp lệ, thực hiện hành động thanh toán
+      //   thanhToan();
+      // }
+      // else if (isValid && thanhToanSelect.value == "Thanh toán Online") {
+      //   qrCode.style.display = "block";
+      //   infor0.style.display = "none"
+      // }
       return isValid;
     }
   </script>
